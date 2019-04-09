@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainGame", "MainGame\MainGame\MainGame.csproj", "{2F1B8328-7DEE-4BC3-90B7-83D325E56643}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "MainGameContent", "MainGame\MainGameContent\MainGameContent.contentproj", "{0516F309-46EA-4926-B438-8DFEDB61DD6F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F1B8328-7DEE-4BC3-90B7-83D325E56643}.Debug|x86.ActiveCfg = Debug|x86
+		{2F1B8328-7DEE-4BC3-90B7-83D325E56643}.Debug|x86.Build.0 = Debug|x86
+		{2F1B8328-7DEE-4BC3-90B7-83D325E56643}.Release|x86.ActiveCfg = Release|x86
+		{2F1B8328-7DEE-4BC3-90B7-83D325E56643}.Release|x86.Build.0 = Release|x86
+		{0516F309-46EA-4926-B438-8DFEDB61DD6F}.Debug|x86.ActiveCfg = Debug|x86
+		{0516F309-46EA-4926-B438-8DFEDB61DD6F}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
