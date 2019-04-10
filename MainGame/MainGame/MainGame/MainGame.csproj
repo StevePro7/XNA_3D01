@@ -78,7 +78,7 @@
     <Compile Include="Chapter\Chap01\Demo13Game1.cs" />
     <Compile Include="Chapter\Chap01\Demo14Game1.cs" />
     <Compile Include="Chapter\Chap01\Demo15Game1.cs" />
-    <Compile Include="Chapter\Chpa02\Demo21Game1.cs" />
+    <Compile Include="Chapter\Chap02\Demo21Game1.cs" />
     <Compile Include="Library\BillboardSystem.cs" />
     <Compile Include="Library\Camera\ArcBallCamera.cs" />
     <Compile Include="Library\Camera\Camera.cs" />
@@ -143,6 +143,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Chapter\Chap03\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
