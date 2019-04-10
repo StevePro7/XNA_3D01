@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MyGame
 {
-	public class CModel
+	public class CModel : IRenderable
 	{
 		public Vector3 Position { get; set; }
 		public Vector3 Rotation { get; set; }
@@ -216,6 +216,20 @@ namespace MyGame
 				foreach (ModelMeshPart part in mesh.MeshParts)
 					if (((MeshTag)part.Tag).CachedEffect != null)
 						part.Effect = ((MeshTag)part.Tag).CachedEffect;
+		}
+
+		public void SetClipPlane(Vector4? Plane)
+		{
+			foreach (ModelMesh mesh in Model.Meshes)
+			foreach (ModelMeshPart part in mesh.MeshParts)
+			{
+				if (part.Effect.Parameters["ClipPlaneEnabled"] != null)
+					part.Effect.Parameters["ClipPlaneEnabled"].SetValue(Plane.HasValue);
+
+				if (Plane.HasValue)
+					if (part.Effect.Parameters["ClipPlane"] != null)
+						part.Effect.Parameters["ClipPlane"].SetValue(Plane.Value);
+			}
 		}
 	}
 
