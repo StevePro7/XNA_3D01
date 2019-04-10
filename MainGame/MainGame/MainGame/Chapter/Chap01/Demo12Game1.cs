@@ -44,6 +44,7 @@ namespace MyGame
             base.Update(gameTime);
         }
 
+
         // Called when the game should draw itself
         protected override void Draw(GameTime gameTime)
         {
@@ -63,5 +64,7 @@ namespace MyGame
 
             base.Draw(gameTime);
         }
+
+
     }
 }

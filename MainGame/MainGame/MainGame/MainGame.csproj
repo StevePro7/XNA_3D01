@@ -73,11 +73,12 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Chapter\Chap01\Load01Game1.cs" />
-    <Compile Include="Chapter\Chap01\Load02Game1.cs" />
-    <Compile Include="Chapter\Chap01\Load03Game1.cs" />
-    <Compile Include="Chapter\Chap01\Load04Game1.cs" />
-    <Compile Include="Chapter\Chap01\Load05Game1.cs" />
+    <Compile Include="Chapter\Chap01\Demo11Game1.cs" />
+    <Compile Include="Chapter\Chap01\Demo12Game1.cs" />
+    <Compile Include="Chapter\Chap01\Demo13Game1.cs" />
+    <Compile Include="Chapter\Chap01\Demo14Game1.cs" />
+    <Compile Include="Chapter\Chap01\Demo15Game1.cs" />
+    <Compile Include="Chapter\Chpa02\Demo21Game1.cs" />
     <Compile Include="Library\BillboardSystem.cs" />
     <Compile Include="Library\Camera\ArcBallCamera.cs" />
     <Compile Include="Library\Camera\Camera.cs" />

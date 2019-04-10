@@ -34,11 +34,11 @@ namespace MyGame
 		private static IDictionary<int, Game> GetGameDictionary()
 		{
 			IDictionary<int, Game> dictionary = new Dictionary<int, Game>();
-			dictionary.Add(1, new Load01Game1());
-			dictionary.Add(2, new Load02Game1());
-			dictionary.Add(3, new Load03Game1());
-			dictionary.Add(4, new Load04Game1());
-			dictionary.Add(5, new Load05Game1());
+			dictionary.Add(1, new Demo11Game1());
+			dictionary.Add(2, new Demo12Game1());
+			dictionary.Add(3, new Demo13Game1());
+			dictionary.Add(4, new Demo14Game1());
+			dictionary.Add(5, new Demo15Game1());
 			return dictionary;
 		}
     }

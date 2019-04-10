@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MyGame
 {
-    public class Load04Game1 : Microsoft.Xna.Framework.Game
+    public class Demo21Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -15,7 +15,7 @@ namespace MyGame
 
         MouseState lastMouseState;
 
-		public Load04Game1()
+		public Demo21Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -29,11 +29,30 @@ namespace MyGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            models.Add(new CModel(Content.Load<Model>("ship"),
-                Vector3.Zero, Vector3.Zero, new Vector3(0.6f), GraphicsDevice));
+            models.Add(new CModel(Content.Load<Model>("teapot"),
+                new Vector3(0, 60, 0), Vector3.Zero, new Vector3(60), 
+                GraphicsDevice));
 
-            camera = new ArcBallCamera(Vector3.Zero, 0, 0, 0, MathHelper.PiOver2, 
-                1200, 1000, 2000, GraphicsDevice);
+            models.Add(new CModel(Content.Load<Model>("ground"),
+                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice));
+
+            Effect simpleEffect = Content.Load<Effect>("LightingEffect");
+
+            models[0].SetModelEffect(simpleEffect, true);
+            models[1].SetModelEffect(simpleEffect, true);
+
+            LightingMaterial mat = new LightingMaterial();
+
+            mat.AmbientColor = Color.Red.ToVector3() * .15f;
+            mat.LightColor = Color.Blue.ToVector3() * .85f;
+
+            models[0].Material = mat;
+            models[1].Material = mat;
+            
+            camera = new FreeCamera(new Vector3(0, 300, 1600),
+                MathHelper.ToRadians(0), // Turned around 153 degrees
+                MathHelper.ToRadians(5), // Pitched up 13 degrees
+                GraphicsDevice);
 
             lastMouseState = Mouse.GetState();
         }
@@ -57,14 +76,22 @@ namespace MyGame
             float deltaY = (float)lastMouseState.Y - (float)mouseState.Y;
 
             // Rotate the camera
-            ((ArcBallCamera)camera).Rotate(deltaX * .01f, deltaY * .01f);
+            ((FreeCamera)camera).Rotate(deltaX * .005f, deltaY * .005f);
 
-            // Calculate scroll wheel movement
-            float scrollDelta = (float)lastMouseState.ScrollWheelValue -
-            (float)mouseState.ScrollWheelValue;
+            Vector3 translation = Vector3.Zero;
+
+            // Determine in which direction to move the camera
+            if (keyState.IsKeyDown(Keys.W)) translation += Vector3.Forward;
+            if (keyState.IsKeyDown(Keys.S)) translation += Vector3.Backward;
+            if (keyState.IsKeyDown(Keys.A)) translation += Vector3.Left;
+            if (keyState.IsKeyDown(Keys.D)) translation += Vector3.Right;
+
+            // Move 3 units per millisecond, independent of frame rate
+            translation *= 4 * 
+                (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             // Move the camera
-            ((ArcBallCamera)camera).Move(scrollDelta);
+            ((FreeCamera)camera).Move(translation);
 
             // Update the camera
             camera.Update();
@@ -80,7 +107,7 @@ namespace MyGame
 
             foreach (CModel model in models)
                 if (camera.BoundingVolumeIsInView(model.BoundingSphere))
-                    model.Draw(camera.View, camera.Projection);
+                    model.Draw(camera.View, camera.Projection, ((FreeCamera)camera).Position);
 
             base.Draw(gameTime);
         }
