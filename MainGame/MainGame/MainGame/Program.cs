@@ -63,6 +63,30 @@ namespace MyGame
 			dictionary.Add(54, new Demo54Game1());
 			dictionary.Add(55, new Demo55Game1());
 
+			// Chap06
+			dictionary.Add(51, new Demo61Game1());
+			dictionary.Add(52, new Demo62Game1());
+			dictionary.Add(53, new Demo63Game1());
+
+			// Chap07
+			dictionary.Add(51, new Demo71Game1());
+			dictionary.Add(52, new Demo72Game1());
+			dictionary.Add(53, new Demo73Game1());
+			dictionary.Add(54, new Demo74Game1());
+
+			// Chap08
+			dictionary.Add(51, new Demo81Game1());
+			dictionary.Add(52, new Demo82Game1());
+			dictionary.Add(53, new Demo83Game1());
+			dictionary.Add(54, new Demo84Game1());
+			dictionary.Add(55, new Demo85Game1());
+
+			// Chap09
+			dictionary.Add(51, new Demo91Game1());
+			dictionary.Add(52, new Demo92Game1());
+			dictionary.Add(53, new Demo93Game1());
+			dictionary.Add(54, new Demo94Game1());
+			dictionary.Add(55, new Demo95Game1());
 			return dictionary;
 		}
     }

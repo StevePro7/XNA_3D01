@@ -188,6 +188,59 @@ namespace MyGame
 				}
 		}
 
+		public void SetMeshEffect(string MeshName, Effect effect, bool CopyEffect)
+		{
+			foreach (ModelMesh mesh in Model.Meshes)
+			{
+				if (mesh.Name != MeshName)
+					continue;
+
+				foreach (ModelMeshPart part in mesh.MeshParts)
+				{
+					Effect toSet = effect;
+
+					// Copy the effect if necessary
+					if (CopyEffect)
+						toSet = effect.Clone();
+
+					MeshTag tag = ((MeshTag)part.Tag);
+
+					// If this ModelMeshPart has a texture, set it to the effect
+					if (tag.Texture != null)
+					{
+						setEffectParameter(toSet, "BasicTexture", tag.Texture);
+						setEffectParameter(toSet, "TextureEnabled", true);
+					}
+					else
+						setEffectParameter(toSet, "TextureEnabled", false);
+
+					// Set our remaining parameters to the effect
+					setEffectParameter(toSet, "DiffuseColor", tag.Color);
+					setEffectParameter(toSet, "SpecularPower", tag.SpecularPower);
+
+					part.Effect = toSet;
+				}
+			}
+		}
+
+		public void SetModelMaterial(Material material)
+		{
+			foreach (ModelMesh mesh in Model.Meshes)
+				SetMeshMaterial(mesh.Name, material);
+		}
+
+		public void SetMeshMaterial(string MeshName, Material material)
+		{
+			foreach (ModelMesh mesh in Model.Meshes)
+			{
+				if (mesh.Name != MeshName)
+					continue;
+
+				foreach (ModelMeshPart meshPart in mesh.MeshParts)
+					((MeshTag)meshPart.Tag).Material = material;
+			}
+		}
+
 		private void generateTags()
 		{
 			foreach (ModelMesh mesh in Model.Meshes)
@@ -239,6 +292,7 @@ namespace MyGame
 		public Texture2D Texture;
 		public float SpecularPower;
 		public Effect CachedEffect = null;
+		public Material Material = new Material();
 
 		public MeshTag(Vector3 Color, Texture2D Texture, float SpecularPower)
 		{

@@ -218,6 +218,23 @@ namespace MyGame
                 vertices[i].Normal.Normalize();
         }
 
+	    public void Draw(Matrix View, Matrix Projection)
+	    {
+		    GraphicsDevice.SetVertexBuffer(vertexBuffer);
+		    GraphicsDevice.Indices = indexBuffer;
+
+		    effect.Parameters["View"].SetValue(View);
+		    effect.Parameters["Projection"].SetValue(Projection);
+		    effect.Parameters["BaseTexture"].SetValue(baseTexture);
+		    effect.Parameters["TextureTiling"].SetValue(textureTiling);
+		    effect.Parameters["LightDirection"].SetValue(lightDirection);
+
+		    effect.Techniques[0].Passes[0].Apply();
+
+		    GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0,
+			    nVertices, 0, nIndices / 3);
+	    }
+
         public void Draw(Matrix View, Matrix Projection, Vector3 CameraPosition)
         {
             GraphicsDevice.SetVertexBuffer(vertexBuffer);
