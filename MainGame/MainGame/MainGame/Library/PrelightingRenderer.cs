@@ -98,18 +98,26 @@ namespace MyGame
 
         public void Draw()
         {
-            drawDepthNormalMap();
-            drawLightMap();
-
-            if (DoShadowMapping)
-            {
-                drawShadowDepthMap();
-                blurShadow(shadowBlurTarg, shadowDepthTarg, 0);
-                blurShadow(shadowDepthTarg, shadowBlurTarg, 1);
-            }
-
-            prepareMainPass();
+          Draw(true);
         }
+
+		public void Draw(bool blur)
+		{
+			drawDepthNormalMap();
+			drawLightMap();
+
+			if (DoShadowMapping)
+			{
+				drawShadowDepthMap();
+				if (blur)
+				{
+					blurShadow(shadowBlurTarg, shadowDepthTarg, 0);
+					blurShadow(shadowDepthTarg, shadowBlurTarg, 1);	
+				}
+			}
+
+			prepareMainPass();
+		}
 
         void drawDepthNormalMap()
         {

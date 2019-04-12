@@ -113,7 +113,7 @@ namespace MyGame
         // Called when the game should draw itself
         protected override void Draw(GameTime gameTime)
         {
-            renderer.Draw();
+            renderer.Draw(false);
 
             GraphicsDevice.Clear(Color.Black);
 
