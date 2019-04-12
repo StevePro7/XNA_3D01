@@ -14,12 +14,14 @@ namespace MyGame
         /// </summary>
         static void Main(string[] args)
         {
-	        int index = Convert.ToInt32(ConfigurationManager.AppSettings["game"]);
-	        IDictionary<int, Game> dictionary = GetGameDictionary();
-	        Game game = null;
+	        //int index = Convert.ToInt32(ConfigurationManager.AppSettings["game"]);
+	        //int index = 31;
+	        //IDictionary<int, Game> dictionary = GetGameDictionary();
+	        //Game game = null;
+	        Game game =  new Demo74Game1();
 	        try
 	        {
-				game = dictionary[index];
+				//game = dictionary[index];
 		        game.Run();
 	        }
 	        finally
