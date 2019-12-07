@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.902
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortGame", "PortGame\PortGame.csproj", "{177A2CB0-F7FE-4C0C-9B3A-1C5D0685B0ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{177A2CB0-F7FE-4C0C-9B3A-1C5D0685B0ED}.Debug|x86.ActiveCfg = Debug|x86
+		{177A2CB0-F7FE-4C0C-9B3A-1C5D0685B0ED}.Debug|x86.Build.0 = Debug|x86
+		{177A2CB0-F7FE-4C0C-9B3A-1C5D0685B0ED}.Release|x86.ActiveCfg = Release|x86
+		{177A2CB0-F7FE-4C0C-9B3A-1C5D0685B0ED}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5C690399-7D20-4C75-9351-BEE593867583}
+	EndGlobalSection
+EndGlobal
