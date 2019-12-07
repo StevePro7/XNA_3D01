@@ -42,7 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Chapter\Chap01\Demo11Game1.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="Chapter\MyBaseGame.cs" />
     <Compile Include="Library\Animation.cs" />
     <Compile Include="Library\BillboardCross.cs" />
     <Compile Include="Library\BillboardSystem.cs" />
