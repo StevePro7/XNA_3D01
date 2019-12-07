@@ -11,3 +11,17 @@ robottexture.xnb
 
 But now get error:
 An unhandled exception of type 'System.AccessViolationException' occurred in SharpDX.Direct3D11.dll
+
+
+
+02.
+Import ship.fbx
+Importer FbxImporter had unexpected failure
+AssImp.AssImpException
+Error importing FIL_DCOM unsupported old format
+
+Installed
+fbx20133_converter_win_x64.exe
+C:\Steven\XNA\MonoGame3D
+
+Installed software but must learn how to convert FBX
