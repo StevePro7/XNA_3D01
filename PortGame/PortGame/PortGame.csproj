@@ -9,8 +9,8 @@
     <ProjectGuid>{177A2CB0-F7FE-4C0C-9B3A-1C5D0685B0ED}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PortGame</RootNamespace>
-    <AssemblyName>PortGame</AssemblyName>
+    <RootNamespace>MyGame</RootNamespace>
+    <AssemblyName>MyGame</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -41,6 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Chapter\Chap01\Demo11Game1.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Library\Animation.cs" />
     <Compile Include="Library\BillboardCross.cs" />
@@ -75,6 +76,7 @@
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
+    <None Include="App.config" />
     <None Include="app.manifest" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
