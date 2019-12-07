@@ -184,8 +184,18 @@ namespace MyGame
             effect.CurrentTechnique.Passes[0].Apply();
 
             // Draw the billboards
-            graphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, 
-                nParticles * 4, 0, nParticles * 2);
+            PrimitiveType primitiveType = PrimitiveType.TriangleList;
+            int baseVertex = 0;
+            //int minVertexIndex = 0;
+            int numVertices = nParticles * 4;
+            int startIndex = 0;
+            int primitiveCount = nParticles * 2;
+
+            //graphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, nParticles * 4, 0, nParticles * 2);
+            //graphicsDevice.DrawIndexedPrimitives(primitiveType, baseVertex, minVertexIndex, numVertices, startIndex, primitiveCount);
+            //stevepro warning
+            graphicsDevice.DrawIndexedPrimitives(primitiveType, baseVertex, startIndex, primitiveCount);
+            
 
             // Un-set the buffers
             graphicsDevice.SetVertexBuffer(null);

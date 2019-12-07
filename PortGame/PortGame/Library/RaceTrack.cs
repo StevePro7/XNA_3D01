@@ -265,8 +265,17 @@ namespace MyGame
             effect.CurrentTechnique.Passes[0].Apply();
 
             // Draw the list of triangles
-            graphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 
-                0, 0, nVertices, 0, nIndices / 3);
+            PrimitiveType primitiveType = PrimitiveType.TriangleList;
+            int baseVertex = 0;
+            //int minVertexIndex = 0;
+            int numVertices = nVertices;
+            int startIndex = 0;
+            int primitiveCount = nIndices / 3;
+
+            //graphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, nVertices, 0, nIndices / 3);
+            //graphicsDevice.DrawIndexedPrimitives(primitiveType, baseVertex, minVertexIndex, numVertices, startIndex, primitiveCount);
+            //stevepro warning
+            graphicsDevice.DrawIndexedPrimitives(primitiveType, baseVertex, startIndex, primitiveCount);
         }
     }
 }

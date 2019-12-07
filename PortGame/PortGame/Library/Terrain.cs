@@ -231,9 +231,18 @@ namespace MyGame
 
 		    effect.Techniques[0].Passes[0].Apply();
 
-		    GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0,
-			    nVertices, 0, nIndices / 3);
-	    }
+            PrimitiveType primitiveType = PrimitiveType.TriangleList;
+            int baseVertex = 0;
+            //int minVertexIndex = 0;
+            int numVertices = nVertices;
+            int startIndex = 0;
+            int primitiveCount = nIndices / 3;
+
+            //GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, nVertices, 0, nIndices / 3);
+            //graphicsDevice.DrawIndexedPrimitives(primitiveType, baseVertex, minVertexIndex, numVertices, startIndex, primitiveCount);
+            //stevepro warning
+            GraphicsDevice.DrawIndexedPrimitives(primitiveType, baseVertex, startIndex, primitiveCount);
+        }
 
         public void Draw(Matrix View, Matrix Projection, Vector3 CameraPosition)
         {
@@ -257,8 +266,17 @@ namespace MyGame
 
             effect.Techniques[0].Passes[0].Apply();
 
-            GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0,
-                nVertices, 0, nIndices / 3);
+            PrimitiveType primitiveType = PrimitiveType.TriangleList;
+            int baseVertex = 0;
+            //int minVertexIndex = 0;
+            int numVertices = nVertices;
+            int startIndex = 0;
+            int primitiveCount = nIndices / 3;
+
+            //GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, nVertices, 0, nIndices / 3);
+            //graphicsDevice.DrawIndexedPrimitives(primitiveType, baseVertex, minVertexIndex, numVertices, startIndex, primitiveCount);
+            //stevepro warning
+            GraphicsDevice.DrawIndexedPrimitives(primitiveType, baseVertex, startIndex, primitiveCount);
         }
 
         public void SetClipPlane(Vector4? Plane)

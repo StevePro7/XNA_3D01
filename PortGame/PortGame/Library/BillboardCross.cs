@@ -169,8 +169,17 @@ namespace MyGame
         {
             effect.CurrentTechnique.Passes[0].Apply();
 
-            graphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0,
-                nBillboards * 8, 0, nBillboards * 4);
+            PrimitiveType primitiveType = PrimitiveType.TriangleList;
+            int baseVertex = 0;
+            //int minVertexIndex = 0;
+            int numVertices = nBillboards * 8;
+            int startIndex = 0;
+            int primitiveCount = nBillboards * 4;
+
+            //graphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, nBillboards * 8, 0, nBillboards * 4);
+            //graphicsDevice.DrawIndexedPrimitives(primitiveType, baseVertex, minVertexIndex, numVertices, startIndex, primitiveCount);
+            //stevepro warning
+            graphicsDevice.DrawIndexedPrimitives(primitiveType, baseVertex, startIndex, primitiveCount);
         }
     }
 }
