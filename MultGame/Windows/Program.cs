@@ -18,7 +18,8 @@ namespace Windows
 		[STAThread]
 		static void Main()
 		{
-			int index = Convert.ToInt32(ConfigurationManager.AppSettings["game"]);
+			int index = 21;
+			//int index = Convert.ToInt32(ConfigurationManager.AppSettings["game"]);
 
 			GameDictionary obj = new GameDictionary();
 			IDictionary<int, Game> dictionary = obj.GetGameDictionary();
