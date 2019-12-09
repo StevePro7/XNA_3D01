@@ -14,7 +14,7 @@ namespace MyGame
 		public Demo11Game1()
 		{
 			graphics = new GraphicsDeviceManager(this);
-			Content.RootDirectory = "Content";
+			//Content.RootDirectory = "Content";
 
 			graphics.PreferredBackBufferWidth = 1280;
 			graphics.PreferredBackBufferHeight = 800;
@@ -25,10 +25,10 @@ namespace MyGame
 		{
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			//model = Content.Load<Model>("ship");
+			model = Content.Load<Model>("Content/ship");
 
-			//modelTransforms = new Matrix[model.Bones.Count];
-			//model.CopyAbsoluteBoneTransformsTo(modelTransforms);
+			modelTransforms = new Matrix[model.Bones.Count];
+			model.CopyAbsoluteBoneTransformsTo(modelTransforms);
 		}
 
 		// Called when the game should update itself
@@ -42,41 +42,41 @@ namespace MyGame
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
-			//Matrix view = Matrix.CreateLookAt(
-			//    new Vector3(200, 300, 900),
-			//    new Vector3(0, 50, 0),
-			//    Vector3.Up);
+			Matrix view = Matrix.CreateLookAt(
+				new Vector3(200, 300, 900),
+				new Vector3(0, 50, 0),
+				Vector3.Up);
 
-			//Matrix projection = Matrix.CreatePerspectiveFieldOfView(
-			//    MathHelper.ToRadians(45), GraphicsDevice.Viewport.AspectRatio,
-			//    0.1f, 10000.0f);
+			Matrix projection = Matrix.CreatePerspectiveFieldOfView(
+				MathHelper.ToRadians(45), GraphicsDevice.Viewport.AspectRatio,
+				0.1f, 10000.0f);
 
-			//// Calculate the starting world matrix
-			//Matrix baseWorld = Matrix.CreateScale(0.4f) * 
-			//    Matrix.CreateRotationY(MathHelper.ToRadians(180));
+			// Calculate the starting world matrix
+			Matrix baseWorld = Matrix.CreateScale(0.4f) *
+				Matrix.CreateRotationY(MathHelper.ToRadians(180));
 
-			//foreach (ModelMesh mesh in model.Meshes)
-			//{
-			//    // Calculate each mesh's world matrix
-			//    Matrix localWorld = modelTransforms[mesh.ParentBone.Index]
-			//        * baseWorld;
+			foreach (ModelMesh mesh in model.Meshes)
+			{
+				// Calculate each mesh's world matrix
+				Matrix localWorld = modelTransforms[mesh.ParentBone.Index]
+					* baseWorld;
 
-			//    foreach (ModelMeshPart part in mesh.MeshParts)
-			//    {
-			//        BasicEffect e = (BasicEffect)part.Effect;
+				foreach (ModelMeshPart part in mesh.MeshParts)
+				{
+					BasicEffect e = (BasicEffect)part.Effect;
 
-			//        // Set the world, view, and projection 
-			//        // matrices to the effect
-			//        e.World = localWorld;
-			//        e.View = view;
-			//        e.Projection = projection;
+					// Set the world, view, and projection 
+					// matrices to the effect
+					e.World = localWorld;
+					e.View = view;
+					e.Projection = projection;
 
-			//        e.EnableDefaultLighting();
-			//    }
+					e.EnableDefaultLighting();
+				}
 
-			//    // Draw the mesh
-			//    mesh.Draw();
-			//}
+				// Draw the mesh
+				mesh.Draw();
+			}
 
 			base.Draw(gameTime);
 		}
