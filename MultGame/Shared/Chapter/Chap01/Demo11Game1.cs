@@ -25,7 +25,7 @@ namespace MyGame
 		{
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			model = Content.Load<Model>("Content/ship_cv1");
+			model = Content.Load<Model>("Content/ship__cv1");
 
 			modelTransforms = new Matrix[model.Bones.Count];
 			model.CopyAbsoluteBoneTransformsTo(modelTransforms);
