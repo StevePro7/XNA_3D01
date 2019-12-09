@@ -2,6 +2,7 @@
 using MyGame;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace Windows
 {
@@ -17,11 +18,10 @@ namespace Windows
 		[STAThread]
 		static void Main()
 		{
+			int index = Convert.ToInt32(ConfigurationManager.AppSettings["game"]);
+
 			GameDictionary obj = new GameDictionary();
 			IDictionary<int, Game> dictionary = obj.GetGameDictionary();
-
-			//int index = Convert.ToInt32(ConfigurationManager.AppSettings["game"]);
-			int index = 11;
 
 			Game game = null;
 			try
