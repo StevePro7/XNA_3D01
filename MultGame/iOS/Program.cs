@@ -1,8 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Foundation;
+using Microsoft.Xna.Framework;
 using MyGame;
-using System;
 using System.Collections.Generic;
-using Foundation;
 using UIKit;
 
 namespace iOS
@@ -14,14 +13,10 @@ namespace iOS
 
 		internal static void RunGame()
 		{
-			//game = new Game1();
-			//game.Run();
+			int index = 11;
 
 			GameDictionary obj = new GameDictionary();
 			IDictionary<int, Game> dictionary = obj.GetGameDictionary();
-
-			//int index = Convert.ToInt32(ConfigurationManager.AppSettings["game"]);
-			int index = 11;
 
 			Game game = null;
 			try
