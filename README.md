@@ -25,3 +25,29 @@ fbx20133_converter_win_x64.exe
 C:\Steven\XNA\MonoGame3D
 
 Installed software but must learn how to convert FBX
+
+
+03.
+https://darkgenesis.zenithmoon.com/updating-old-fbx-files-for-the-modern-era
+
+Launch Content.mgcb
+Copy ship_tex.tga to Content directory
+
+FBX Converter
+https://www.autodesk.com/developer-network/platform-technologies/fbx-converter-archives
+FBX 2013.3 Converter for Windows
+Add FBX Converter
+Add...
+Copy fbx file to temp folder
+E:\Steven\Temp\4
+Destination file location
+Change destination folder
+point to same Content directory
+Embed data
+FBX Save Mode	binary
+Convert
+
+This will save the FBX2013 converted ship.fbx file next to ship_tex.tga
+right click ship.fbx
+Rebuild
+OK
