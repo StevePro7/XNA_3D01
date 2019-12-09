@@ -51,3 +51,8 @@ This will save the FBX2013 converted ship.fbx file next to ship_tex.tga
 right click ship.fbx
 Rebuild
 OK
+
+Tried again but dump both fbx + tga files into Content directory
+Convert but set destination same as source but just rename e.g. ship_cv1
+so at least on the same level
+then rename to ship_cv1 in code
