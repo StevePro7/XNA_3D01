@@ -10,11 +10,37 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Library\" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Test.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\Animation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\BillboardCross.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\BillboardSystem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\Camera\ArcBallCamera.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\Camera\Camera.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\Camera\ChaseCamera.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\Camera\FreeCamera.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\CModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\DepthOfField.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\GaussianBlur.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\Materials\Material.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\Materials\MultiLightingMaterial.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\Materials\PointLightMaterial.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\Materials\ProjectedTextureMaterial.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\Materials\SpotLightMaterial.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\ParticleSystem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\ParticleVertex.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\PostProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\PPPointLight.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\PrelightingRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\RaceTrack.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\SkySphere.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\TargetCamera.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\Terrain.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\Test.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Library\Water.cs" />
   </ItemGroup>
 </Project>
