@@ -9,8 +9,6 @@ namespace iOS
 	[Register("AppDelegate")]
 	class Program : UIApplicationDelegate
 	{
-		private static Game1 game;
-
 		internal static void RunGame()
 		{
 			int index = 11;
@@ -18,21 +16,10 @@ namespace iOS
 			GameDictionary obj = new GameDictionary();
 			IDictionary<int, Game> dictionary = obj.GetGameDictionary();
 
-			Game game = null;
-			try
-			{
-				game = dictionary[index];
-				game.Window.Title = $"Demo{index}Game";
-				game.IsMouseVisible = true;
-				game.Run();
-			}
-			finally
-			{
-				if (null != game)
-				{
-					game.Dispose();
-				}
-			}
+			Game game = dictionary[index];
+			game.Window.Title = $"Demo{index}Game";
+			game.IsMouseVisible = true;
+			game.Run();
 		}
 
 		/// <summary>

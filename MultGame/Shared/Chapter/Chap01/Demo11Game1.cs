@@ -26,7 +26,7 @@ namespace MyGame
 		{
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			model = Content.Load<Model>("Content/ship__cv1");
+			model = Content.Load<Model>("Content/ship__cv3");
 			image = Content.Load<Texture2D>("Content/ship_tex");
 
 			modelTransforms = new Matrix[model.Bones.Count];
@@ -74,8 +74,8 @@ namespace MyGame
 					e.Projection = projection;
 
 					//http://community.monogame.net/t/problem-with-3d-objects-textures/2474/12
-					e.Texture = image;
-					//e.TextureEnabled = true;
+					//e.Texture = image;
+					//e.TextureEnabled = false;
 					e.EnableDefaultLighting();
 				}
 
