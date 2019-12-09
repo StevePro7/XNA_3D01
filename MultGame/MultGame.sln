@@ -13,8 +13,6 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Shared", "Shared\Shared.shp
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Shared\Shared.projitems*{29b49343-63dd-4afb-b7d6-5ce77db7f4ff}*SharedItemsImports = 4
-		Shared\Shared.projitems*{870dbcb4-faf3-4949-9247-0bca6ba663a1}*SharedItemsImports = 4
 		Shared\Shared.projitems*{96ad7efa-b069-4f65-9d85-ef2838f20083}*SharedItemsImports = 4
 		Shared\Shared.projitems*{a0cdbd0e-3a41-42b7-9425-a838bc2c7383}*SharedItemsImports = 13
 	EndGlobalSection
