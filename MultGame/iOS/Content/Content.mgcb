@@ -1,4 +1,5 @@
-﻿#----------------------------- Global Properties ----------------------------#
+
+#----------------------------- Global Properties ----------------------------#
 
 /outputDir:bin/$(Platform)
 /intermediateDir:obj/$(Platform)
@@ -11,3 +12,13 @@
 
 
 #---------------------------------- Content ---------------------------------#
+
+#begin ship.xnb
+/copy:ship.xnb
+
+#begin ship_tex.xnb
+/copy:ship_tex.xnb
+
+#begin ship_tex_0.xnb
+/copy:ship_tex_0.xnb
+

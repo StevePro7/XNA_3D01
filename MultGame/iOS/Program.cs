@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using MyGame;
+using System;
+using System.Collections.Generic;
 using Foundation;
 using UIKit;
 
@@ -11,8 +14,30 @@ namespace iOS
 
 		internal static void RunGame()
 		{
-			game = new Game1();
-			game.Run();
+			//game = new Game1();
+			//game.Run();
+
+			GameDictionary obj = new GameDictionary();
+			IDictionary<int, Game> dictionary = obj.GetGameDictionary();
+
+			//int index = Convert.ToInt32(ConfigurationManager.AppSettings["game"]);
+			int index = 11;
+
+			Game game = null;
+			try
+			{
+				game = dictionary[index];
+				game.Window.Title = $"Demo{index}Game";
+				game.IsMouseVisible = true;
+				game.Run();
+			}
+			finally
+			{
+				if (null != game)
+				{
+					game.Dispose();
+				}
+			}
 		}
 
 		/// <summary>

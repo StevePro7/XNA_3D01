@@ -7,12 +7,13 @@ namespace MyGame
     {
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-            {
-                Exit();
-            }
-
-            base.Update(gameTime);
+#if WINDOWS
+			if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+			{
+				Exit();
+			}
+#endif
+			base.Update(gameTime);
         }
     }
 }
