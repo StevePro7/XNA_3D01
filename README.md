@@ -56,3 +56,13 @@ Tried again but dump both fbx + tga files into Content directory
 Convert but set destination same as source but just rename e.g. ship_cv1
 so at least on the same level
 then rename to ship_cv1 in code
+
+
+SUMMARY
+the old programs work
+is this because
+they are separate proj / sln file per platform
+they are using an older version of MG package	3.7.0
+
+Source:
+D:\Steven\XNA\BOOK2\XNA 3D\0041OT_Code\Code Bundle\0041_01_revised code\1_LoadModel
