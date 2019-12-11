@@ -3,13 +3,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MyGame
 {
-    public class Demo11Game1 : Microsoft.Xna.Framework.Game
+    public class Demo11Game1 : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         Model model;
         Matrix[] modelTransforms;
+        Texture2D image;
 
 		public Demo11Game1()
         {
@@ -26,6 +27,7 @@ namespace MyGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             model = Content.Load<Model>("Content/ship__cv1");
+            image = Content.Load<Texture2D>("Content/ship_tex");
 
             modelTransforms = new Matrix[model.Bones.Count];
             model.CopyAbsoluteBoneTransformsTo(modelTransforms);
@@ -70,7 +72,7 @@ namespace MyGame
                     e.World = localWorld;
                     e.View = view;
                     e.Projection = projection;
-
+                    e.Texture = image;
                     e.EnableDefaultLighting();
                 }
 

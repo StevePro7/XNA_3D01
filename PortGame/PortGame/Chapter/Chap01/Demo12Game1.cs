@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MyGame
 {
-    public class Demo12Game1 : Microsoft.Xna.Framework.Game
+    public class Demo12Game1 : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -31,7 +31,7 @@ namespace MyGame
                     Vector3 position = new Vector3(
                         -600 + x * 600, -400 + y * 400, 0);
 
-                    models.Add(new CModel(Content.Load<Model>("ship"),
+                    models.Add(new CModel(Content.Load<Model>("ship__cv1"),
                         position,
                         new Vector3(0, MathHelper.ToRadians(90) * (y * 3 + x), 0),
                         new Vector3(0.25f), GraphicsDevice));

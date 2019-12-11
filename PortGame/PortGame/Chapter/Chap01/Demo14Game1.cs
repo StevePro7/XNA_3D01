@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MyGame
 {
-    public class Demo14Game1 : Microsoft.Xna.Framework.Game
+    public class Demo14Game1 : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -29,7 +29,7 @@ namespace MyGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            models.Add(new CModel(Content.Load<Model>("ship"),
+            models.Add(new CModel(Content.Load<Model>("ship__cv1"),
                 Vector3.Zero, Vector3.Zero, new Vector3(0.6f), GraphicsDevice));
 
             camera = new ArcBallCamera(Vector3.Zero, 0, 0, 0, MathHelper.PiOver2, 
