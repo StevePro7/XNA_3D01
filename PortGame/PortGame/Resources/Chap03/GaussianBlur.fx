@@ -1,3 +1,15 @@
+//http://www.monogame.net/documentation/?page=Custom_Effects
+#if OPENGL
+	#define VS_SHADERMODEL vs_3_0
+	#define PS_SHADERMODEL ps_3_0
+#else
+	#define VS_SHADERMODEL vs_4_0_level_9_1
+	#define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
+
+// IMPORTANT - this was not working:
+// sampler2D tex[1];
 texture2D BasicTexture;
 sampler2D basicTextureSampler = sampler_state { 
 	texture = <BasicTexture>; 
@@ -25,6 +37,6 @@ technique Technique1
 {
     pass p0
     {
-		PixelShader = compile ps_4_0 PixelShaderFunction();
+		PixelShader = compile PS_SHADERMODEL PixelShaderFunction();
     }
 }
