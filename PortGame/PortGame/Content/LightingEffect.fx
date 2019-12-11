@@ -72,7 +72,8 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 	float3 color = DiffuseColor;
 
 	// Texture if necessary
-	if (TextureEnabled)
+	// https://github.com/MonoGame/MonoGame/issues/2271
+	if (TextureEnabled == true)
 		color *= tex2D(BasicTextureSampler, input.UV);
 
 	// Start with ambient lighting

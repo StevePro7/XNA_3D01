@@ -26,8 +26,8 @@ namespace MyGame
 		{
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			model = Content.Load<Model>("Content/robot");
-			image = Content.Load<Texture2D>("Content/robottexture_0");
+			model = Content.Load<Model>("Content/ship__cv1");
+			image = Content.Load<Texture2D>("Content/ship_tex");
 
 			modelTransforms = new Matrix[model.Bones.Count];
 			model.CopyAbsoluteBoneTransformsTo(modelTransforms);
