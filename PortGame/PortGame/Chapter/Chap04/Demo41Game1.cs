@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MyGame
 {
-    public class Demo41Game1 : Microsoft.Xna.Framework.Game
+    public class Demo41Game1 : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -20,10 +20,16 @@ namespace MyGame
 		public Demo41Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
 
-            graphics.PreferredBackBufferWidth = 1280;
-            graphics.PreferredBackBufferHeight = 800;
+            // http://community.monogame.net/t/effect-loading-sharpdx-sharpdxexception-occurred-in-sharpdx-dll/8242/3
+            // http://community.monogame.net/t/solved-effect-load-errors-with-latest-build-directx/8741
+            GraphicsProfile gp1 = graphics.GraphicsProfile;
+            graphics.GraphicsProfile = GraphicsProfile.HiDef;
+            GraphicsProfile gp2 = graphics.GraphicsProfile;
+            //Content.RootDirectory = "Content";
+
+            //graphics.PreferredBackBufferWidth = 1280;
+            //graphics.PreferredBackBufferHeight = 800;
         }
 
         // Called when the game should load its content
@@ -31,28 +37,28 @@ namespace MyGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            models.Add(new CModel(Content.Load<Model>("teapot"),
+            models.Add(new CModel(Content.Load<Model>("Content/teapot__cv1"),
                 new Vector3(0, 60, 0), Vector3.Zero, new Vector3(60), 
                 GraphicsDevice));
 
-            models.Add(new CModel(Content.Load<Model>("ground"),
-                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice));
+            //models.Add(new CModel(Content.Load<Model>("ground"),
+            //    Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice));
 
-            Effect effect = Content.Load<Effect>("ProjectedTexture");
+            Effect effect = Content.Load<Effect>("Content/ProjectedTexture");
 
             models[0].SetModelEffect(effect, true);
-            models[1].SetModelEffect(effect, true);
+            //models[1].SetModelEffect(effect, true);
 
             ProjectedTextureMaterial mat = new ProjectedTextureMaterial(
-                Content.Load<Texture2D>("projected texture"), GraphicsDevice);
+                Content.Load<Texture2D>("Content/projected_texture"), GraphicsDevice);
             mat.ProjectorPosition = new Vector3(0, 4500, 4500);
             mat.ProjectorTarget = new Vector3(0, 0, 0);
             mat.Scale = 2;
 
             models[0].Material = mat;
-            models[1].Material = mat;
+            //models[1].Material = mat;
 
-            camera = new FreeCamera(new Vector3(0, 300, 1600),
+            camera = new FreeCamera(new Vector3(0, 200, 600),
                 MathHelper.ToRadians(0), // Turned around 153 degrees
                 MathHelper.ToRadians(5), // Pitched up 13 degrees
                 GraphicsDevice);

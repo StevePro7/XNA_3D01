@@ -86,6 +86,24 @@
 /processorParam:DebugMode=Auto
 /build:PPModel.fx
 
+#begin projected_texture.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:projected_texture.jpg
+
+#begin ProjectedTexture.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:ProjectedTexture.fx
+
 #begin ShadowDepthEffect.fx
 /importer:EffectImporter
 /processor:EffectProcessor
