@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MyGame
 {
-    public class Demo21Game1 : Microsoft.Xna.Framework.Game
+    public class Demo21Game1 : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -26,8 +26,8 @@ namespace MyGame
             GraphicsProfile gp2 = graphics.GraphicsProfile;
             //Content.RootDirectory = "Content";
 
-            graphics.PreferredBackBufferWidth = 1280;
-            graphics.PreferredBackBufferHeight = 800;
+            //graphics.PreferredBackBufferWidth = 1280;
+            //graphics.PreferredBackBufferHeight = 800;
         }
 
         // Called when the game should load its content
@@ -55,7 +55,7 @@ namespace MyGame
             models[0].Material = mat;
             //models[1].Material = mat;
             
-            camera = new FreeCamera(new Vector3(0, 300, 1600),
+            camera = new FreeCamera(new Vector3(0, 200, 600),
                 MathHelper.ToRadians(0), // Turned around 153 degrees
                 MathHelper.ToRadians(5), // Pitched up 13 degrees
                 GraphicsDevice);
