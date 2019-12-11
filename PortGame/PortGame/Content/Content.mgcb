@@ -68,6 +68,12 @@
 /processorParam:TextureFormat=Color
 /build:ship_tex.tga
 
+#begin SpotLightEffect.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:SpotLightEffect.fx
+
 #begin teapot__cv1.fbx
 /importer:FbxImporter
 /processor:ModelProcessor
