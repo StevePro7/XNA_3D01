@@ -18,7 +18,13 @@ namespace MyGame
 		public Demo21Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+
+            // http://community.monogame.net/t/effect-loading-sharpdx-sharpdxexception-occurred-in-sharpdx-dll/8242/3
+            // http://community.monogame.net/t/solved-effect-load-errors-with-latest-build-directx/8741
+            GraphicsProfile gp1 = graphics.GraphicsProfile;
+            graphics.GraphicsProfile = GraphicsProfile.HiDef;
+            GraphicsProfile gp2 = graphics.GraphicsProfile;
+            //Content.RootDirectory = "Content";
 
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 800;
@@ -29,17 +35,17 @@ namespace MyGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            models.Add(new CModel(Content.Load<Model>("teapot"),
+            models.Add(new CModel(Content.Load<Model>("Content/teapot__cv1"),
                 new Vector3(0, 60, 0), Vector3.Zero, new Vector3(60), 
                 GraphicsDevice));
 
-            models.Add(new CModel(Content.Load<Model>("ground"),
-                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice));
+            //models.Add(new CModel(Content.Load<Model>("ground"),
+            //    Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice));
 
-            Effect simpleEffect = Content.Load<Effect>("LightingEffect");
+            Effect simpleEffect = Content.Load<Effect>("Content/LightingEffect");
 
             models[0].SetModelEffect(simpleEffect, true);
-            models[1].SetModelEffect(simpleEffect, true);
+            //models[1].SetModelEffect(simpleEffect, true);
 
             LightingMaterial mat = new LightingMaterial();
 
@@ -47,7 +53,7 @@ namespace MyGame
             mat.LightColor = Color.Blue.ToVector3() * .85f;
 
             models[0].Material = mat;
-            models[1].Material = mat;
+            //models[1].Material = mat;
             
             camera = new FreeCamera(new Vector3(0, 300, 1600),
                 MathHelper.ToRadians(0), // Turned around 153 degrees
