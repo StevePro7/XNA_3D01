@@ -66,3 +66,20 @@ they are using an older version of MG package	3.7.0
 
 Source:
 D:\Steven\XNA\BOOK2\XNA 3D\0041OT_Code\Code Bundle\0041_01_revised code\1_LoadModel
+
+
+11/12/2019
+ground.x
+System.InvalidOperationException: 'An error occurred while preparing to draw. This is probably because the current vertex declaration does not include all the elements required by the current vertex shader. The current vertex declaration includes these elements: SV_Position0, TEXCOORD0.'
+
+http://community.monogame.net/t/solved-new-to-3d-in-monogame-custom-shader-missing-vertex-elements/2761
+
+Try this
+https://forum.unity.com/threads/convert-x-files-or-another-solution.98530/
+http://www.unwrap3d.com/u3d/index.aspx
+
+cannot recognize DirectX .x file
+https://www.unwrap3d.com/u3d/troubleshoot.aspx
+
+After installing the following software ground.x can be recognized
+For 64-bit programs: d3dx9c_redist_x64.zip (5.1 MB)
