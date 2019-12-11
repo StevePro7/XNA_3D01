@@ -110,6 +110,12 @@
 /processorParam:DebugMode=Auto
 /build:ShadowDepthEffect.fx
 
+#begin ShadowMapping.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:ShadowMapping.fx
+
 #begin ship__cv1.fbx
 /importer:FbxImporter
 /processor:ModelProcessor
@@ -165,4 +171,10 @@
 /processorParam:SwapWindingOrder=False
 /processorParam:TextureFormat=Compressed
 /build:teapot__cv1.fbx
+
+#begin VSM.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:VSM.fx
 

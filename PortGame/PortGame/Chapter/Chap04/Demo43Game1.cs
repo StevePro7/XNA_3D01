@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MyGame
 {
-    public class Demo43Game1 : Microsoft.Xna.Framework.Game
+    public class Demo43Game1 : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -20,10 +20,16 @@ namespace MyGame
 		public Demo43Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
 
-            graphics.PreferredBackBufferWidth = 1280;
-            graphics.PreferredBackBufferHeight = 800;
+            // http://community.monogame.net/t/effect-loading-sharpdx-sharpdxexception-occurred-in-sharpdx-dll/8242/3
+            // http://community.monogame.net/t/solved-effect-load-errors-with-latest-build-directx/8741
+            GraphicsProfile gp1 = graphics.GraphicsProfile;
+            graphics.GraphicsProfile = GraphicsProfile.HiDef;
+            GraphicsProfile gp2 = graphics.GraphicsProfile;
+            //Content.RootDirectory = "Content";
+
+            //graphics.PreferredBackBufferWidth = 1280;
+            //graphics.PreferredBackBufferHeight = 800;
         }
 
         // Called when the game should load its content
@@ -31,17 +37,17 @@ namespace MyGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            models.Add(new CModel(Content.Load<Model>("teapot"),
+            models.Add(new CModel(Content.Load<Model>("Content/teapot__cv1"),
                 Vector3.Zero, Vector3.Zero, new Vector3(60), 
                 GraphicsDevice));
 
-            models.Add(new CModel(Content.Load<Model>("ground"),
-                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice));
+            //models.Add(new CModel(Content.Load<Model>("ground"),
+            //    Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice));
 
-            Effect effect = Content.Load<Effect>("VSM");
+            Effect effect = Content.Load<Effect>("Content/VSM");
 
             models[0].SetModelEffect(effect, true);
-            models[1].SetModelEffect(effect, true);
+            //models[1].SetModelEffect(effect, true);
 
             camera = new FreeCamera(new Vector3(0, 3200, -700),
                 MathHelper.ToRadians(0),
@@ -66,10 +72,10 @@ namespace MyGame
         // Called when the game should update itself
         protected override void Update(GameTime gameTime)
 		{
-			if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-			{
-				Exit();
-			}
+			//if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+			//{
+			//	Exit();
+			//}
             updateCamera(gameTime);
 
             base.Update(gameTime);

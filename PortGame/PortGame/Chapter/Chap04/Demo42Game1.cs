@@ -44,7 +44,7 @@ namespace MyGame
             //models.Add(new CModel(Content.Load<Model>("ground"),
             //    Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice));
 
-            Effect effect = Content.Load<Effect>("ShadowMapping");
+            Effect effect = Content.Load<Effect>("Content/ShadowMapping");
 
             models[0].SetModelEffect(effect, true);
             //models[1].SetModelEffect(effect, true);

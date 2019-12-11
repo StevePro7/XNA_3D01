@@ -267,7 +267,7 @@ namespace MyGame
                             part.Effect.Parameters["ShadowLightPosition"].SetValue(ShadowLightPosition);
 
                         if (part.Effect.Parameters["ShadowFarPlane"] != null)
-                            part.Effect.Parameters["ShadowFarPlane"].SetValue(shadowFarPlane);
+                            part.Effect.Parameters["ShadowFarPlane"].SetValue((float)shadowFarPlane);
 
                         if (part.Effect.Parameters["ShadowMult"] != null)
                             part.Effect.Parameters["ShadowMult"].SetValue(ShadowMult);
