@@ -42,7 +42,7 @@ namespace MyGame
             //models.Add(new CModel(Content.Load<Model>("ground"),
             //    Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice));
 
-            Effect simpleEffect = Content.Load<Effect>("MultiLightingEffect");
+            Effect simpleEffect = Content.Load<Effect>("Content/MultiLightingEffect");
 
             models[0].SetModelEffect(simpleEffect, true);
             //models[1].SetModelEffect(simpleEffect, true);

@@ -70,25 +70,26 @@ namespace MyGame
                 viewHeight, false, SurfaceFormat.Color, DepthFormat.Depth24);
 
             // Load effects
-            depthNormalEffect = Content.Load<Effect>("PPDepthNormal");
-            lightingEffect = Content.Load<Effect>("PPLight");
+            depthNormalEffect = Content.Load<Effect>("Content/PPDepthNormal");
+            lightingEffect = Content.Load<Effect>("Content/PPLight");
 
             // Set effect parameters to light mapping effect
-            lightingEffect.Parameters["viewportWidth"].SetValue(viewWidth);
-            lightingEffect.Parameters["viewportHeight"].SetValue(viewHeight);
+            //float fviewWidth = (float)viewWidth;
+            lightingEffect.Parameters["viewportWidth"].SetValue((float)viewWidth);
+            lightingEffect.Parameters["viewportHeight"].SetValue((float)viewHeight);
 
             // Load point light mesh and set light mapping effect to it
-            lightMesh = Content.Load<Model>("PPLightMesh");
+            lightMesh = Content.Load<Model>("Content/PPLightMesh__cv1");
             lightMesh.Meshes[0].MeshParts[0].Effect = lightingEffect;
 
             shadowDepthTarg = new RenderTarget2D(GraphicsDevice, shadowMapSize, 
                 shadowMapSize, false, SurfaceFormat.HalfVector2, DepthFormat.Depth24);
 
-            shadowDepthEffect = Content.Load<Effect>("ShadowDepthEffect");
-            shadowDepthEffect.Parameters["FarPlane"].SetValue(shadowFarPlane);
+            shadowDepthEffect = Content.Load<Effect>("Content/ShadowDepthEffect");
+            shadowDepthEffect.Parameters["FarPlane"].SetValue((float)shadowFarPlane);
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            shadowBlurEffect = Content.Load<Effect>("GaussianBlur");
+            shadowBlurEffect = Content.Load<Effect>("Content/GaussianBlur");
 
             shadowBlurTarg = new RenderTarget2D(GraphicsDevice, shadowMapSize,
                 shadowMapSize, false, SurfaceFormat.HalfVector2, DepthFormat.Depth24);
@@ -243,10 +244,10 @@ namespace MyGame
                             part.Effect.Parameters["LightTexture"].SetValue(lightTarg);
 
                         if (part.Effect.Parameters["viewportWidth"] != null)
-                            part.Effect.Parameters["viewportWidth"].SetValue(viewWidth);
+                            part.Effect.Parameters["viewportWidth"].SetValue((float)viewWidth);
 
                         if (part.Effect.Parameters["viewportHeight"] != null)
-                            part.Effect.Parameters["viewportHeight"].SetValue(viewHeight);
+                            part.Effect.Parameters["viewportHeight"].SetValue((float)viewHeight);
 
                         if (part.Effect.Parameters["DoShadowMapping"] != null)
                             part.Effect.Parameters["DoShadowMapping"].SetValue(DoShadowMapping);
