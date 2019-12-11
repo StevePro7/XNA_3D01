@@ -26,8 +26,8 @@ namespace MyGame
             GraphicsProfile gp2 = graphics.GraphicsProfile;
             //Content.RootDirectory = "Content";
 
-            graphics.PreferredBackBufferWidth = 1280;
-            graphics.PreferredBackBufferHeight = 800;
+            //graphics.PreferredBackBufferWidth = 1280;
+            //graphics.PreferredBackBufferHeight = 800;
         }
 
         // Called when the game should load its content
@@ -53,7 +53,7 @@ namespace MyGame
             models[0].Material = material;
             //models[1].Material = material;
 
-            camera = new FreeCamera(new Vector3(0, 300, 1600),
+            camera = new FreeCamera(new Vector3(0, 200, 600),
                 MathHelper.ToRadians(0), // Turned around 153 degrees
                 MathHelper.ToRadians(5), // Pitched up 13 degrees
                 GraphicsDevice);

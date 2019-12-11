@@ -1,3 +1,13 @@
+//http://www.monogame.net/documentation/?page=Custom_Effects
+#if OPENGL
+	#define VS_SHADERMODEL vs_3_0
+	#define PS_SHADERMODEL ps_3_0
+#else
+	#define VS_SHADERMODEL vs_4_0_level_9_1
+	#define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
+
 float4x4 World;
 float4x4 View;
 float4x4 Projection;
@@ -74,9 +84,7 @@ technique Technique1
 {
     pass Pass1
     {
-        // TODO: set renderstates here.
-
-        VertexShader = compile vs_4_0 VertexShaderFunction();
-        PixelShader = compile ps_4_0 PixelShaderFunction();
+		VertexShader = compile VS_SHADERMODEL VertexShaderFunction();
+		PixelShader = compile PS_SHADERMODEL PixelShaderFunction();
     }
 }
