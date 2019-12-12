@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MyGame
 {
-    public class Demo53Game1 : Microsoft.Xna.Framework.Game
+    public class Demo53Game1 : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -19,7 +19,7 @@ namespace MyGame
         public Demo53Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            //Content.RootDirectory = "Content";
 
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 800;
@@ -30,18 +30,18 @@ namespace MyGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            models.Add(new CModel(Content.Load<Model>("ground"),
-                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice));
+            //models.Add(new CModel(Content.Load<Model>("ground"),
+            //    Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice));
 
-            models.Add(new CModel(Content.Load<Model>("brick_wall"),
+            models.Add(new CModel(Content.Load<Model>("Content/brick_wall__cv1"),
                 Vector3.Zero, new Vector3(0,0, 0), Vector3.One, GraphicsDevice));
 
-            Effect lightingEffect = Content.Load<Effect>("LightingEffect");
+            Effect lightingEffect = Content.Load<Effect>("Content/LightingEffect");
             LightingMaterial lightingMat = new LightingMaterial();
             
-            Effect normalMapEffect = Content.Load<Effect>("NormalMapEffect");
+            Effect normalMapEffect = Content.Load<Effect>("Content/NormalMapEffect");
             NormalMapMaterial normalMat = new NormalMapMaterial(
-                Content.Load<Texture2D>("brick_normal_map"));
+                Content.Load<Texture2D>("Content/brick_normal_map"));
 
             lightingMat.LightDirection = new Vector3(.5f, .5f, 1);
             lightingMat.LightColor = Vector3.One;
@@ -50,10 +50,10 @@ namespace MyGame
             normalMat.LightColor = Vector3.One;
 
             models[0].SetModelEffect(lightingEffect, true);
-            models[1].SetModelEffect(normalMapEffect, true);
+            //models[1].SetModelEffect(normalMapEffect, true);
 
             models[0].Material = lightingMat;
-            models[1].Material = normalMat;
+            //models[1].Material = normalMat;
 
             camera = new FreeCamera(new Vector3(0, 400, 1400),
                 MathHelper.ToRadians(0),
@@ -61,7 +61,7 @@ namespace MyGame
                 GraphicsDevice);
 
             sky = new SkySphere(Content, GraphicsDevice,
-                Content.Load<TextureCube>("clouds"));
+                Content.Load<TextureCube>("Content/clouds"));
 
             lastMouseState = Mouse.GetState();
         }

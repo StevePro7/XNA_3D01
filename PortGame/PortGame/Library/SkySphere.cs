@@ -18,11 +18,11 @@ namespace MyGame
         public SkySphere(ContentManager Content, 
             GraphicsDevice GraphicsDevice, TextureCube Texture)
         {
-            model = new CModel(Content.Load<Model>("skysphere_mesh"), 
+            model = new CModel(Content.Load<Model>("Content/skysphere_mesh__cv1"), 
                 Vector3.Zero,Vector3.Zero, new Vector3(100000), 
                 GraphicsDevice);
 
-            effect = Content.Load<Effect>("skysphere_effect");
+            effect = Content.Load<Effect>("Content/skysphere_effect");
             effect.Parameters["CubeMap"].SetValue(Texture);
 
             model.SetModelEffect(effect, false);
