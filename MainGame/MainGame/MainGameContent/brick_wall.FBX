@@ -238,14 +238,14 @@ Objects:  {
             Comment: ""
         }
         Properties60:  {
-            Property: "DocumentUrl", "KString", "", "C:\Users\Sean\Desktop\brick_wall.FBX"
-            Property: "SrcDocumentUrl", "KString", "", "C:\Users\Sean\Desktop\brick_wall.FBX"
+            Property: "DocumentUrl", "KString", "", "brick_wall.FBX"
+            Property: "SrcDocumentUrl", "KString", "", "brick_wall.FBX"
             Property: "Original", "Compound", ""
             Property: "Original|ApplicationVendor", "KString", "", "Autodesk"
             Property: "Original|ApplicationName", "KString", "", "3ds Max"
             Property: "Original|ApplicationVersion", "KString", "", "2009.4"
             Property: "Original|DateTime_GMT", "DateTime", "", "10/10/2010 06:33:04.060"
-            Property: "Original|FileName", "KString", "", "C:\Users\Sean\Desktop\brick_wall.FBX"
+            Property: "Original|FileName", "KString", "", "brick_wall.FBX"
             Property: "LastSaved", "Compound", ""
             Property: "LastSaved|ApplicationVendor", "KString", "", "Autodesk"
             Property: "LastSaved|ApplicationName", "KString", "", "3ds Max"
@@ -292,7 +292,7 @@ Objects:  {
             Property: "LastFrame", "int", "",0
             Property: "Width", "int", "",0
             Property: "Height", "int", "",0
-            Property: "Path", "KString", "", "C:\Users\Sean\Desktop\brick_texture_map.jpg"
+            Property: "Path", "KString", "", "brick_texture_map.jpg"
             Property: "StartFrame", "int", "",0
             Property: "StopFrame", "int", "",0
             Property: "PlaySpeed", "double", "",0
@@ -303,7 +303,7 @@ Objects:  {
             Property: "AccessMode", "enum", "",0
         }
         UseMipMap: 0
-        Filename: "C:\Users\Sean\Desktop\brick_texture_map.jpg"
+        Filename: "brick_texture_map.jpg"
         RelativeFilename: "brick_texture_map.jpg"
     }
     Texture: "Texture::Map #1", "" {
@@ -328,7 +328,7 @@ Objects:  {
             Property: "UVSet", "KString", "", "UVChannel_1"
         }
         Media: "Video::Map #1"
-        FileName: "C:\Users\Sean\Desktop\brick_texture_map.jpg"
+        FileName: "brick_texture_map.jpg"
         RelativeFilename: "brick_texture_map.jpg"
         ModelUVTranslation: 0,0
         ModelUVScaling: 1,1
