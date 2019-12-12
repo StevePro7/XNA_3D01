@@ -6,7 +6,7 @@ using System;
 
 namespace MyGame
 {
-    public class Demo94Game1 : Microsoft.Xna.Framework.Game
+    public class Demo94Game1 : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -21,7 +21,7 @@ namespace MyGame
 		public Demo94Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            //Content.RootDirectory = "Content";
 
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 800;
@@ -37,20 +37,20 @@ namespace MyGame
                 MathHelper.ToRadians(-30),
                 GraphicsDevice);
 
-            models.Add(new CModel(Content.Load<Model>("windmill"),
+            models.Add(new CModel(Content.Load<Model>("Content/windmill__cv1"),
                 Vector3.Zero, Vector3.Zero, new Vector3(0.25f), GraphicsDevice));
 
             anim = new ObjectAnimation(new Vector3(0, 875, 0), new Vector3(0, 875, 0),
                 Vector3.Zero, new Vector3(0, 0, MathHelper.TwoPi),
                 TimeSpan.FromSeconds(10), true);
 
-            models.Add(new CModel(Content.Load<Model>("ground"),
-                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice));
+            //models.Add(new CModel(Content.Load<Model>("ground"),
+            //    Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice));
 
             foreach(ModelMesh mesh in models[0].Model.Meshes)
                 foreach (BasicEffect effect in mesh.Effects)
                 {
-                    effect.Texture = Content.Load<Texture2D>("windmill_diffuse");
+                    effect.Texture = Content.Load<Texture2D>("Content/windmill_diffuse");
                     effect.TextureEnabled = true;
                 }
 

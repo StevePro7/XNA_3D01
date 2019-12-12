@@ -6,7 +6,7 @@ using System;
 
 namespace MyGame
 {
-    public class Demo91Game1 : Microsoft.Xna.Framework.Game
+    public class Demo91Game1 : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -21,7 +21,7 @@ namespace MyGame
 		public Demo91Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            //Content.RootDirectory = "Content";
 
             graphics.PreferredBackBufferWidth = 800;
             graphics.PreferredBackBufferHeight = 600;
@@ -37,7 +37,7 @@ namespace MyGame
                 MathHelper.ToRadians(-30),
                 GraphicsDevice);
 
-            models.Add(new CModel(Content.Load<Model>("ship"),
+            models.Add(new CModel(Content.Load<Model>("Content/ship__cv1"),
                 Vector3.Zero, Vector3.Zero, new Vector3(0.25f), GraphicsDevice));
 
             anim = new ObjectAnimation(new Vector3(0, -150, 0), new Vector3(0, 150, 0), Vector3.Zero,

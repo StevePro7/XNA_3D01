@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MyGame
 {
-    public class Demo55Game1 : Microsoft.Xna.Framework.Game
+    public class Demo55Game1 : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -21,7 +21,7 @@ namespace MyGame
         public Demo55Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            //Content.RootDirectory = "Content";
 
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 800;
@@ -32,12 +32,12 @@ namespace MyGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            models.Add(new CModel(Content.Load<Model>("teapot"),
+            models.Add(new CModel(Content.Load<Model>("Content/teapot__cv1"),
                 Vector3.Zero, Vector3.Zero, Vector3.One * 50, GraphicsDevice));
 
-            Effect cubeMapEffect = Content.Load<Effect>("CubeMapReflect");
+            Effect cubeMapEffect = Content.Load<Effect>("Content/CubeMapReflect");
             CubeMapReflectMaterial cubeMat = new CubeMapReflectMaterial(
-                Content.Load<TextureCube>("clouds"));
+                Content.Load<TextureCube>("Content/clouds"));
 
             models[0].SetModelEffect(cubeMapEffect, false);
             models[0].Material = cubeMat;
@@ -45,7 +45,7 @@ namespace MyGame
             Plane clip = new Plane(Vector3.Up, 0);
 
             sky = new SkySphere(Content, GraphicsDevice,
-                Content.Load<TextureCube>("clouds"));
+                Content.Load<TextureCube>("Content/clouds"));
 
             water = new Water(Content, GraphicsDevice,
                 new Vector3(0, 0, 0), new Vector2(8000, 8000));

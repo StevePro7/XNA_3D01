@@ -29,7 +29,7 @@ namespace MyGame
             this.content = content;
             this.graphics = graphics;
 
-            waterMesh = new CModel(content.Load<Model>("plane"), position,
+            waterMesh = new CModel(content.Load<Model>("Content/plane"), position,
                 Vector3.Zero, new Vector3(size.X, 1, size.Y), graphics);
 
             waterEffect = content.Load<Effect>("WaterEffect");
