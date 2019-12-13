@@ -18,7 +18,7 @@ namespace MyGame
 		public Demo13Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            //Content.RootDirectory = "Content";
 
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 800;
@@ -29,7 +29,7 @@ namespace MyGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            models.Add(new CModel(Content.Load<Model>("ship__cv1"),
+            models.Add(new CModel(Content.Load<Model>("Content/ship__cv1"),
                 Vector3.Zero, Vector3.Zero, new Vector3(0.6f), GraphicsDevice));
 
             camera = new FreeCamera(new Vector3(1000, 0, -2000), 

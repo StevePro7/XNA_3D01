@@ -36,15 +36,22 @@ namespace MyGame
 			}
 		}
 
+		private bool enableLighting;
+
 		public CModel(Model Model, Vector3 Position, Vector3 Rotation,
-			Vector3 Scale, GraphicsDevice graphicsDevice)
+			Vector3 Scale, GraphicsDevice graphicsDevice) : this(Model, Position, Rotation, Scale, graphicsDevice, true)
+		{
+		}
+
+		public CModel(Model Model, Vector3 Position, Vector3 Rotation,
+			Vector3 Scale, GraphicsDevice graphicsDevice, bool enableLighting)
 		{
 			this.Model = Model;
 
 			modelTransforms = new Matrix[Model.Bones.Count];
 			Model.CopyAbsoluteBoneTransformsTo(modelTransforms);
 
-			buildBoundingSphere();
+			buildBoundingSphere();	
 			generateTags();
 
 			this.Position = Position;
@@ -54,6 +61,7 @@ namespace MyGame
 			this.graphicsDevice = graphicsDevice;
 
 			this.Material = new Material();
+			this.enableLighting = enableLighting;
 		}
 
 		private void buildBoundingSphere()
@@ -94,7 +102,10 @@ namespace MyGame
 					effect.View = View;
 					effect.Projection = Projection;
 
-					effect.EnableDefaultLighting();
+					if (enableLighting)
+					{
+						effect.EnableDefaultLighting();
+					}
 				}
 
 				mesh.Draw();

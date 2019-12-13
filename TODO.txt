@@ -46,3 +46,12 @@ I tried to convert *.x file to *.dae
 https://www.ofoct.com/3d-model-file-for-3d-printer-converter/3d-model-file-converter.html
 
 and then used Autodesk FBX converter to convert *.dae to *.fbx but still got the same error
+
+
+BREAKTHRU
+13/12/2019
+https://gamedev.stackexchange.com/questions/106397/why-does-my-monogame-mesh-throw-an-unhandled-exception-when-trying-to-draw
+
+If I remove the following line then ground.x file renders OK without error
+this first test was on Windows
+Therefore clone CModel and try again
