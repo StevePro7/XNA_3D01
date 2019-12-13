@@ -25,3 +25,24 @@ GraphicsProfile gp2 = graphics.GraphicsProfile;
 
 whereas Android and iOS have these [new] lines of code commented out
 what happens if I leave these lines in when doing Android and iOS
+
+
+
+error rendering *.x files
+
+System.InvalidOperationException: 'An error occurred while preparing to draw. This is probably because the current vertex declaration does not include all the elements required by the current vertex shader. The current vertex declaration includes these elements: SV_Position0, COLOR0.'
+
+
+This exception was originally thrown at this call stack:
+	SharpDX.Result.CheckError()
+	SharpDX.Direct3D11.Device.CreateInputLayout(SharpDX.Direct3D11.InputElement[], int, System.IntPtr, SharpDX.PointerSize, SharpDX.Direct3D11.InputLayout)
+	SharpDX.Direct3D11.InputLayout.InputLayout(SharpDX.Direct3D11.Device, byte[], SharpDX.Direct3D11.InputElement[])
+	Microsoft.Xna.Framework.Graphics.InputLayoutCache.GetOrCreate(Microsoft.Xna.Framework.Graphics.VertexBufferBindings)
+
+
+
+
+I tried to convert *.x file to *.dae 
+https://www.ofoct.com/3d-model-file-for-3d-printer-converter/3d-model-file-converter.html
+
+and then used Autodesk FBX converter to convert *.dae to *.fbx but still got the same error
