@@ -28,8 +28,8 @@ namespace MyGame
             GraphicsProfile gp2 = graphics.GraphicsProfile;
             //Content.RootDirectory = "Content";
 
-            //graphics.PreferredBackBufferWidth = 1280;
-            //graphics.PreferredBackBufferHeight = 800;
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 800;
         }
 
         // Called when the game should load its content
@@ -41,8 +41,8 @@ namespace MyGame
                 new Vector3(0, 60, 0), Vector3.Zero, new Vector3(60), 
                 GraphicsDevice));
 
-            //models.Add(new CModel(Content.Load<Model>("ground"),
-            //    Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice));
+            models.Add(new CModel(Content.Load<Model>("Content/ground"),
+                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice, false));
 
             Effect effect = Content.Load<Effect>("Content/ProjectedTexture");
 
