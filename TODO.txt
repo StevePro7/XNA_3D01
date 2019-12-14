@@ -56,6 +56,9 @@ If I remove the following line then ground.x file renders OK without error
 this first test was on Windows
 Therefore clone CModel and try again
 
+VSI file
+include in Content directory but do not include in mcgb file and rebuild!
+
 
 14/12/2019
 PortGame
