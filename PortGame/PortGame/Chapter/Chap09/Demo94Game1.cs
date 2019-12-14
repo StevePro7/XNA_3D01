@@ -44,8 +44,8 @@ namespace MyGame
                 Vector3.Zero, new Vector3(0, 0, MathHelper.TwoPi),
                 TimeSpan.FromSeconds(10), true);
 
-            //models.Add(new CModel(Content.Load<Model>("ground"),
-            //    Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice));
+            models.Add(new CModel(Content.Load<Model>("Content/ground"),
+                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice, false));
 
             foreach(ModelMesh mesh in models[0].Model.Meshes)
                 foreach (BasicEffect effect in mesh.Effects)
