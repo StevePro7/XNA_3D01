@@ -32,17 +32,14 @@ namespace MyGame
             waterMesh = new CModel(content.Load<Model>("Content/plane"), position,
                 Vector3.Zero, new Vector3(size.X, 1, size.Y), graphics);
 
-            waterEffect = content.Load<Effect>("WaterEffect");
+            waterEffect = content.Load<Effect>("Content/WaterEffect");
             waterMesh.SetModelEffect(waterEffect, false);
 
-            waterEffect.Parameters["viewportWidth"].SetValue(
-                graphics.Viewport.Width);
+            waterEffect.Parameters["viewportWidth"].SetValue((float)graphics.Viewport.Width);
 
-            waterEffect.Parameters["viewportHeight"].SetValue(
-                graphics.Viewport.Height);
+            waterEffect.Parameters["viewportHeight"].SetValue((float)graphics.Viewport.Height);
 
-            waterEffect.Parameters["WaterNormalMap"].SetValue(
-                content.Load<Texture2D>("water_normal"));
+            waterEffect.Parameters["WaterNormalMap"].SetValue(content.Load<Texture2D>("Content/water_normal"));
 
             reflectionTarg = new RenderTarget2D(graphics, graphics.Viewport.Width,
                 graphics.Viewport.Height, false, SurfaceFormat.Color, 
