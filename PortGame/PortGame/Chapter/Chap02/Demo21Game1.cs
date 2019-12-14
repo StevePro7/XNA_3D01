@@ -26,8 +26,8 @@ namespace MyGame
             GraphicsProfile gp2 = graphics.GraphicsProfile;
             //Content.RootDirectory = "Content";
 
-            //graphics.PreferredBackBufferWidth = 1280;
-            //graphics.PreferredBackBufferHeight = 800;
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 800;
         }
 
         // Called when the game should load its content

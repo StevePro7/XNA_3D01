@@ -36,6 +36,7 @@ namespace MyGame
 			}
 		}
 
+		public bool EnableLighting { get { return enableLighting; } }
 		private bool enableLighting;
 
 		public CModel(Model Model, Vector3 Position, Vector3 Rotation,

@@ -132,9 +132,11 @@ namespace MyGame
             foreach (CModel model in Models)
             {
                 model.CacheEffects();
-                model.SetModelEffect(depthNormalEffect, false);
-                model.Draw(Camera.View, Camera.Projection, 
-                    ((FreeCamera)Camera).Position);
+                if (model.EnableLighting)
+                {
+                    model.SetModelEffect(depthNormalEffect, false);
+                }
+                model.Draw(Camera.View, Camera.Projection, ((FreeCamera)Camera).Position);
                 model.RestoreEffects();
             }
 
