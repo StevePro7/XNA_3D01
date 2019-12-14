@@ -6,7 +6,7 @@ using System;
 
 namespace MyGame
 {
-    public class Demo62Game1 : Microsoft.Xna.Framework.Game
+    public class Demo62Game1 : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -22,7 +22,7 @@ namespace MyGame
 		public Demo62Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            //Content.RootDirectory = "Content";
 
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 800;
@@ -33,16 +33,16 @@ namespace MyGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            models.Add(new CModel(Content.Load<Model>("grass_ground"),
-                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice));
+            models.Add(new CModel(Content.Load<Model>("Content/grass_ground"),
+                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice, false));
 
-            Effect effect = Content.Load<Effect>("LightingEffect");
+            Effect effect = Content.Load<Effect>("Content/LightingEffect");
 
             LightingMaterial mat = new LightingMaterial();
             mat.SpecularColor = Color.Black.ToVector3();
 
-            models[0].SetModelEffect(effect, true);
-            models[0].Material = mat;
+            //models[0].SetModelEffect(effect, true);
+            //models[0].Material = mat;
             
             camera = new FreeCamera(new Vector3(0, 700, 3000),
                 MathHelper.ToRadians(0),
@@ -61,7 +61,7 @@ namespace MyGame
                 );
 
             trees = new BillboardCross(GraphicsDevice, Content, 
-                Content.Load<Texture2D>("tree_billboard"), new Vector2(800), 
+                Content.Load<Texture2D>("Content/tree_billboard"), new Vector2(800), 
                 positions);
 
             //trees.Mode = BillboardSystem.BillboardMode.Cylindrical;
@@ -77,7 +77,7 @@ namespace MyGame
             }
 
             clouds = new BillboardSystem(GraphicsDevice, Content,
-                Content.Load<Texture2D>("cloud2"), new Vector2(1000),
+                Content.Load<Texture2D>("Content/cloud2"), new Vector2(1000),
                 cloudPositions);
 
             clouds.EnsureOcclusion = false;

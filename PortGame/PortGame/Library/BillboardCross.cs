@@ -38,7 +38,7 @@ namespace MyGame
             this.graphicsDevice = graphicsDevice;
             this.texture = texture;
 
-            effect = content.Load<Effect>("BillboardCrossEffect");
+            effect = content.Load<Effect>("Content/BillboardCrossEffect");
 
             generateParticles(particlePositions);
         }

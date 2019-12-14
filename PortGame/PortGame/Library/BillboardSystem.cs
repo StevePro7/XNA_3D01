@@ -41,7 +41,7 @@ namespace MyGame
             this.graphicsDevice = graphicsDevice;
             this.texture = texture;
 
-            effect = content.Load<Effect>("BillboardEffect");
+            effect = content.Load<Effect>("Content/BillboardEffect");
 
             generateParticles(particlePositions);
         }

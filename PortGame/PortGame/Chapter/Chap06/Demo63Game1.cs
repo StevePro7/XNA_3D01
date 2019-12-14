@@ -6,7 +6,7 @@ using System;
 
 namespace MyGame
 {
-    public class Demo63Game1 : Microsoft.Xna.Framework.Game
+    public class Demo63Game1 : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -23,7 +23,7 @@ namespace MyGame
 		public Demo63Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            //Content.RootDirectory = "Content";
 
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 800;
@@ -34,26 +34,26 @@ namespace MyGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            models.Add(new CModel(Content.Load<Model>("ground"),
-                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice));
+            models.Add(new CModel(Content.Load<Model>("Content/ground"),
+                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice, false));
 
-            Effect effect = Content.Load<Effect>("LightingEffect");
+            Effect effect = Content.Load<Effect>("Content/LightingEffect");
 
             LightingMaterial mat = new LightingMaterial();
             mat.SpecularColor = Color.Black.ToVector3();
 
-            models[0].SetModelEffect(effect, true);
-            models[0].Material = mat;
+            //models[0].SetModelEffect(effect, true);
+            //models[0].Material = mat;
             
             camera = new FreeCamera(new Vector3(0, 700, 3000),
                 MathHelper.ToRadians(0),
                 MathHelper.ToRadians(5),
                 GraphicsDevice);
 
-            ps = new ParticleSystem(GraphicsDevice, Content, Content.Load<Texture2D>("fire"), 
+            ps = new ParticleSystem(GraphicsDevice, Content, Content.Load<Texture2D>("Content/fire"), 
                 400, new Vector2(400), 1, Vector3.Zero, 0.5f);
 
-            smoke = new ParticleSystem(GraphicsDevice, Content, Content.Load<Texture2D>("smoke"),
+            smoke = new ParticleSystem(GraphicsDevice, Content, Content.Load<Texture2D>("Content/smoke"),
                 400, new Vector2(800), 6, new Vector3(500, 0, 0), 5f);
 
             lastMouseState = Mouse.GetState();

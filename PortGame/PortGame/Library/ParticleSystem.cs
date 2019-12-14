@@ -58,7 +58,7 @@ namespace MyGame
 
             generateParticles();
 
-            effect = content.Load<Effect>("ParticleEffect");
+            effect = content.Load<Effect>("Content/ParticleEffect");
 
             start = DateTime.Now;
         }
