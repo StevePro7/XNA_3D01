@@ -29,11 +29,11 @@ namespace MyGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            //models.Add(new CModel(Content.Load<Model>("ground"),
-            //    Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice));
-
             models.Add(new CModel(Content.Load<Model>("Content/brick_wall__cv1"),
-                Vector3.Zero, new Vector3(0,0, 0), Vector3.One, GraphicsDevice));
+                new Vector3(0, 200, 0), Vector3.Zero, Vector3.One, GraphicsDevice));
+
+            models.Add(new CModel(Content.Load<Model>("Content/ground"),
+                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice, false));
 
             Effect lightingEffect = Content.Load<Effect>("Content/LightingEffect");
             LightingMaterial lightingMat = new LightingMaterial();

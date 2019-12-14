@@ -55,3 +55,8 @@ https://gamedev.stackexchange.com/questions/106397/why-does-my-monogame-mesh-thr
 If I remove the following line then ground.x file renders OK without error
 this first test was on Windows
 Therefore clone CModel and try again
+
+
+14/12/2019
+PortGame
+54	is this correct?

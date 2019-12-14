@@ -49,7 +49,7 @@ namespace MyGame
             models[0].SetModelEffect(effect, true);
             //models[1].SetModelEffect(effect, true);
 
-            camera = new FreeCamera(new Vector3(0, 3200, -700),
+            camera = new FreeCamera(new Vector3(0, 2200, -200),
                 MathHelper.ToRadians(0),
                 MathHelper.ToRadians(-90),
                 GraphicsDevice);

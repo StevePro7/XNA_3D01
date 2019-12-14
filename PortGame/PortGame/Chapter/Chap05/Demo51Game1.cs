@@ -39,15 +39,15 @@ namespace MyGame
                 Vector3.Zero, Vector3.Zero, new Vector3(60), 
                 GraphicsDevice));
 
-            //models.Add(new CModel(Content.Load<Model>("ground"),
-            //    Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice));
+            models.Add(new CModel(Content.Load<Model>("Content/ground"),
+                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice, false));
 
             Effect effect = Content.Load<Effect>("Content/Fog");
 
             models[0].SetModelEffect(effect, true);
             //models[1].SetModelEffect(effect, true);
 
-            camera = new FreeCamera(new Vector3(0, 3200, -700),
+            camera = new FreeCamera(new Vector3(0, 2200, -200),
                 MathHelper.ToRadians(0),
                 MathHelper.ToRadians(-90),
                 GraphicsDevice);
