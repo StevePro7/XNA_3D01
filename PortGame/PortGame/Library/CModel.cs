@@ -135,7 +135,11 @@ namespace MyGame
 						((BasicEffect)effect).World = localWorld;
 						((BasicEffect)effect).View = View;
 						((BasicEffect)effect).Projection = Projection;
-						((BasicEffect)effect).EnableDefaultLighting();
+
+						if(enableLighting)
+						{
+							((BasicEffect)effect).EnableDefaultLighting();
+						}
 					}
 					else
 					{

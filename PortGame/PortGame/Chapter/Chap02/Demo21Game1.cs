@@ -39,8 +39,8 @@ namespace MyGame
                 new Vector3(0, 60, 0), Vector3.Zero, new Vector3(60), 
                 GraphicsDevice));
 
-            //models.Add(new CModel(Content.Load<Model>("ground"),
-            //    Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice));
+            models.Add(new CModel(Content.Load<Model>("Content/ground"),
+                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice, false));
 
             Effect simpleEffect = Content.Load<Effect>("Content/LightingEffect");
 
@@ -54,7 +54,7 @@ namespace MyGame
 
             models[0].Material = mat;
             //models[1].Material = mat;
-            
+
             camera = new FreeCamera(new Vector3(0, 200, 600),
                 MathHelper.ToRadians(0), // Turned around 153 degrees
                 MathHelper.ToRadians(5), // Pitched up 13 degrees
