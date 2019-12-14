@@ -6,7 +6,7 @@ using System;
 
 namespace MyGame
 {
-    public class Demo85Game1 : Microsoft.Xna.Framework.Game
+    public class Demo85Game1 : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -24,7 +24,7 @@ namespace MyGame
 		public Demo85Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            //Content.RootDirectory = "Content";
 
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 800;
@@ -40,13 +40,13 @@ namespace MyGame
                 MathHelper.ToRadians(-30),
                 GraphicsDevice);
 
-            Effect effect = Content.Load<Effect>("LightingEffect");
+            Effect effect = Content.Load<Effect>("Content/LightingEffect");
             LightingMaterial mat = new LightingMaterial();
 
             for (int z = -1; z <= 1; z++)
                 for (int x = -1; x <= 1; x++)
                 {
-                    CModel model = new CModel(Content.Load<Model>("glow_teapot"),
+                    CModel model = new CModel(Content.Load<Model>("Content/glow_teapot__cv1"),
                         new Vector3(x * 500, 0, z * 500), Vector3.Zero, 
                         Vector3.One * 5, GraphicsDevice);
 
@@ -56,7 +56,7 @@ namespace MyGame
                     models.Add(model);
                 }
 
-            CModel ground = new CModel(Content.Load<Model>("glow_plane"),
+            CModel ground = new CModel(Content.Load<Model>("Content/glow_plane__cv1"),
                 Vector3.Zero, Vector3.Zero, Vector3.One * 6, GraphicsDevice);
 
             ground.SetModelEffect(effect, true);
@@ -67,9 +67,9 @@ namespace MyGame
             renderCapture = new RenderCapture(GraphicsDevice);
             glowCapture = new RenderCapture(GraphicsDevice);
 
-            glowEffect = Content.Load<Effect>("GlowEffect");
+            glowEffect = Content.Load<Effect>("Content/GlowEffect");
             glowEffect.Parameters["GlowTexture"].SetValue(
-                Content.Load<Texture2D>("glow_map"));
+                Content.Load<Texture2D>("Content/glow_map"));
 
             blur = new GaussianBlur(GraphicsDevice, Content, 4);
 

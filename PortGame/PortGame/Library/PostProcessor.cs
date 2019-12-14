@@ -68,17 +68,13 @@ namespace MyGame
         public RenderCapture(GraphicsDevice GraphicsDevice)
 	    {
             this.graphicsDevice = GraphicsDevice;
-            renderTarget = new RenderTarget2D(GraphicsDevice,
-                GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height,
-                false, SurfaceFormat.Color, DepthFormat.Depth24);
+            renderTarget = new RenderTarget2D(GraphicsDevice, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, false, SurfaceFormat.Color, DepthFormat.Depth24);
 	    }
 
         public RenderCapture(GraphicsDevice GraphicsDevice, SurfaceFormat Format)
         {
             this.graphicsDevice = GraphicsDevice;
-            renderTarget = new RenderTarget2D(GraphicsDevice,
-                GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height,
-                false, Format, DepthFormat.Depth24);
+            renderTarget = new RenderTarget2D(GraphicsDevice, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, false, Format, DepthFormat.Depth24);
         }
 
         // Begins capturing from the graphics device

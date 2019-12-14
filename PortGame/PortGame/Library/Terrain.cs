@@ -47,7 +47,7 @@ namespace MyGame
 
             this.GraphicsDevice = GraphicsDevice;
 
-            effect = Content.Load<Effect>("TerrainEffect");
+            effect = Content.Load<Effect>("Content/TerrainEffect");
 
             // 1 vertex per pixel
             nVertices = width * length;

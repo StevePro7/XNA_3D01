@@ -15,7 +15,7 @@ namespace MyGame
         public Texture2D Unblurred;
 
         public DepthOfField(GraphicsDevice graphicsDevice, ContentManager Content)
-            : base(Content.Load<Effect>("DepthOfField"), graphicsDevice)
+            : base(Content.Load<Effect>("Content/DepthOfField"), graphicsDevice)
         {
         }
 

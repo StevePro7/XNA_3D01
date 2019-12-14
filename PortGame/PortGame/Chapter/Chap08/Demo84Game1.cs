@@ -6,7 +6,7 @@ using System;
 
 namespace MyGame
 {
-    public class Demo84Game1 : Microsoft.Xna.Framework.Game
+    public class Demo84Game1 : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -28,7 +28,7 @@ namespace MyGame
 		public Demo84Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            //Content.RootDirectory = "Content";
 
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 800;
@@ -44,13 +44,13 @@ namespace MyGame
                 MathHelper.ToRadians(-30),
                 GraphicsDevice);
 
-            Effect effect = Content.Load<Effect>("LightingEffect");
+            Effect effect = Content.Load<Effect>("Content/LightingEffect");
             LightingMaterial mat = new LightingMaterial();
 
             for (int z = -1; z <= 1; z++)
                 for (int x = -1; x <= 1; x++)
                 {
-                    CModel model = new CModel(Content.Load<Model>("teapot"),
+                    CModel model = new CModel(Content.Load<Model>("Content/teapot__cv1"),
                         new Vector3(x * 500, 0, z * 500), Vector3.Zero, 
                         Vector3.One * 50, GraphicsDevice);
 
@@ -58,25 +58,26 @@ namespace MyGame
                     model.SetModelMaterial(mat);
 
                     model.Model.Meshes[0].MeshParts[0].Effect.Parameters["BasicTexture"].SetValue(
-                        Content.Load<Texture2D>("brick_texture_map"));
+                        Content.Load<Texture2D>("Content/brick_texture_map"));
                     model.Model.Meshes[0].MeshParts[0].Effect.Parameters["TextureEnabled"].SetValue(true);
 
                     models.Add(model);
                 }
 
-            CModel ground = new CModel(Content.Load<Model>("ground"),
-                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice);
+            CModel ground = new CModel(Content.Load<Model>("Content/ground"),
+                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice, false);
 
-            ground.SetModelEffect(effect, true);
-            ground.SetModelMaterial(mat);
+            //ground.SetModelEffect(effect, true);
+            //ground.SetModelMaterial(mat);
 
             models.Add(ground);
 
             renderCapture = new RenderCapture(GraphicsDevice);
             postprocessor = new GaussianBlur(GraphicsDevice, Content, 2);
 
-            depthEffect = Content.Load<Effect>("DepthEffect");
-            depthCapture = new RenderCapture(GraphicsDevice, SurfaceFormat.HalfSingle);
+            depthEffect = Content.Load<Effect>("Content/DepthEffect");
+            //depthCapture = new RenderCapture(GraphicsDevice, SurfaceFormat.HalfSingle);
+            depthCapture = new RenderCapture(GraphicsDevice);
 
             blurCapture = new RenderCapture(GraphicsDevice, SurfaceFormat.Color);
             dof = new DepthOfField(GraphicsDevice, Content);

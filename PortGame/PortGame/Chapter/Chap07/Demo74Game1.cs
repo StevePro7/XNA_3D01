@@ -6,7 +6,7 @@ using System;
 
 namespace MyGame
 {
-    public class Demo74Game1  : Microsoft.Xna.Framework.Game
+    public class Demo74Game1  : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -29,7 +29,7 @@ namespace MyGame
 		public Demo74Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            //Content.RootDirectory = "Content";
 
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 800;
@@ -45,15 +45,15 @@ namespace MyGame
                 MathHelper.ToRadians(-30),
                 GraphicsDevice);
 
-            terrain = new Terrain(Content.Load<Texture2D>("terrain"), 30, 4800,
-                Content.Load<Texture2D>("grass"), 6, new Vector3(1, -1, 0),
+            terrain = new Terrain(Content.Load<Texture2D>("Content/terrain"), 30, 4800,
+                Content.Load<Texture2D>("Content/grass"), 6, new Vector3(1, -1, 0),
                 GraphicsDevice, Content);
 
-            terrain.WeightMap = Content.Load<Texture2D>("weightMap");
-            terrain.RTexture = Content.Load<Texture2D>("sand");
-            terrain.GTexture = Content.Load<Texture2D>("rock");
-            terrain.BTexture = Content.Load<Texture2D>("snow");
-            terrain.DetailTexture = Content.Load<Texture2D>("noise_texture");
+            terrain.WeightMap = Content.Load<Texture2D>("Content/weightMap");
+            terrain.RTexture = Content.Load<Texture2D>("Content/sand");
+            terrain.GTexture = Content.Load<Texture2D>("Content/rock");
+            terrain.BTexture = Content.Load<Texture2D>("Content/snow");
+            terrain.DetailTexture = Content.Load<Texture2D>("Content/noise_texture");
 
             // Positions where trees should be drawn
             List<Vector3> treePositions = new List<Vector3>();
@@ -80,7 +80,7 @@ namespace MyGame
             }
 
             trees = new BillboardSystem(GraphicsDevice, Content,
-                Content.Load<Texture2D>("tree_billboard"), new Vector2(200), 
+                Content.Load<Texture2D>("Content/tree_billboard"), new Vector2(200), 
                 treePositions.ToArray());
 
             trees.Mode = BillboardSystem.BillboardMode.Cylindrical;
@@ -91,7 +91,7 @@ namespace MyGame
             List<Vector3> grassPositions = new List<Vector3>();
 
             // Retrieve pixel grid from grass map
-            Texture2D grassMap = Content.Load<Texture2D>("grass_map");
+            Texture2D grassMap = Content.Load<Texture2D>("Content/grass_map");
             Color[] grassPixels = new Color[grassMap.Width * grassMap.Height];
             grassMap.GetData<Color>(grassPixels);
 
@@ -124,7 +124,7 @@ namespace MyGame
 
             // Create grass billboard system
             grass = new BillboardSystem(GraphicsDevice, Content,
-                Content.Load<Texture2D>("grass_billboard"), new Vector2(100),
+                Content.Load<Texture2D>("Content/grass_billboard"), new Vector2(100),
                 grassPositions.ToArray());
 
             grass.Mode = BillboardSystem.BillboardMode.Cylindrical;
@@ -153,14 +153,14 @@ namespace MyGame
             }
 
             clouds = new BillboardSystem(GraphicsDevice, Content,
-                Content.Load<Texture2D>("cloud2"), new Vector2(2000),
+                Content.Load<Texture2D>("Content/cloud2"), new Vector2(2000),
                 cloudPositions.ToArray());
 
             clouds.Mode = BillboardSystem.BillboardMode.Spherical;
             clouds.EnsureOcclusion = false;
 
             sky = new SkySphere(Content, GraphicsDevice,
-                Content.Load<TextureCube>("clouds"));
+                Content.Load<TextureCube>("Content/clouds"));
 
             water = new Water(Content, GraphicsDevice,
                 new Vector3(0, 1600, 0), new Vector2(256 * 30));

@@ -21,7 +21,7 @@ namespace MyGame
 
         public GaussianBlur(GraphicsDevice graphicsDevice, ContentManager Content,
             float BlurAmount) 
-            : base(Content.Load<Effect>("GaussianBlur"), graphicsDevice)
+            : base(Content.Load<Effect>("Content/GaussianBlur"), graphicsDevice)
         {
             this.blurAmount = BlurAmount;
 

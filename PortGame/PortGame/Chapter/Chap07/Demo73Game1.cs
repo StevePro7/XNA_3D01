@@ -6,7 +6,7 @@ using System;
 
 namespace MyGame
 {
-    public class Demo73Game1 : Microsoft.Xna.Framework.Game
+    public class Demo73Game1 : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -21,7 +21,7 @@ namespace MyGame
 		public Demo73Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            //Content.RootDirectory = "Content";
 
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 800;
@@ -37,15 +37,15 @@ namespace MyGame
                 MathHelper.ToRadians(-30),
                 GraphicsDevice);
 
-            terrain = new Terrain(Content.Load<Texture2D>("terrain"), 30, 4800,
-                Content.Load<Texture2D>("grass"), 6, new Vector3(1, -1, 0),
+            terrain = new Terrain(Content.Load<Texture2D>("Content/terrain"), 30, 4800,
+                Content.Load<Texture2D>("Content/grass"), 6, new Vector3(1, -1, 0),
                 GraphicsDevice, Content);
 
-            terrain.WeightMap = Content.Load<Texture2D>("weightMap");
-            terrain.RTexture = Content.Load<Texture2D>("sand");
-            terrain.GTexture = Content.Load<Texture2D>("rock");
-            terrain.BTexture = Content.Load<Texture2D>("snow");
-            terrain.DetailTexture = Content.Load<Texture2D>("noise_texture");
+            terrain.WeightMap = Content.Load<Texture2D>("Content/weightMap");
+            terrain.RTexture = Content.Load<Texture2D>("Content/sand");
+            terrain.GTexture = Content.Load<Texture2D>("Content/rock");
+            terrain.BTexture = Content.Load<Texture2D>("Content/snow");
+            terrain.DetailTexture = Content.Load<Texture2D>("Content/noise_texture");
 
             lastMouseState = Mouse.GetState();
         }

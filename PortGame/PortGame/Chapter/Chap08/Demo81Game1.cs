@@ -6,7 +6,7 @@ using System;
 
 namespace MyGame
 {
-    public class Demo81Game1 : Microsoft.Xna.Framework.Game
+    public class Demo81Game1 : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -19,7 +19,7 @@ namespace MyGame
 		public Demo81Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            //Content.RootDirectory = "Content";
 
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 800;
@@ -35,8 +35,8 @@ namespace MyGame
                 MathHelper.ToRadians(-30),
                 GraphicsDevice);
 
-            Effect lit = Content.Load<Effect>("LightingEffect");
-            Effect normal = Content.Load<Effect>("NormalMapEffect");
+            Effect lit = Content.Load<Effect>("Content/LightingEffect");
+            Effect normal = Content.Load<Effect>("Content/NormalMapEffect");
 
             LightingMaterial marble = new LightingMaterial();
             marble.SpecularColor = Color.White.ToVector3();
@@ -45,12 +45,12 @@ namespace MyGame
             steel.SpecularColor = Color.Gray.ToVector3();
 
             NormalMapMaterial brick = new NormalMapMaterial(
-                Content.Load<Texture2D>("brick_normal_map"));
+                Content.Load<Texture2D>("Content/brick_normal_map"));
 
             NormalMapMaterial wood = new NormalMapMaterial(
-                Content.Load<Texture2D>("wood_normal"));
+                Content.Load<Texture2D>("Content/wood_normal"));
 
-            CModel model = new CModel(Content.Load<Model>("multimesh"),
+            CModel model = new CModel(Content.Load<Model>("Content/multimesh__cv1"),
                 Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice);
 
             model.SetMeshEffect("Box01", normal, true);
