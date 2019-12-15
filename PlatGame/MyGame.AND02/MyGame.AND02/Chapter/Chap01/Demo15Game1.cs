@@ -32,7 +32,7 @@ namespace MyGame
             models.Add(new CModel(Content.Load<Model>("Content/ship__cv1"),
                 new Vector3(0, 400, 0), Vector3.Zero, new Vector3(0.4f), GraphicsDevice));
 
-            models.Add(new CModel(Content.Load<Model>("Content/ground"),
+            models.Add(new CModel(Content.Load<Model>("Content/Ground"),
                 Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice, false));
 
             camera = new ChaseCamera(new Vector3(0, 400, 1500), new Vector3(0, 200, 0),

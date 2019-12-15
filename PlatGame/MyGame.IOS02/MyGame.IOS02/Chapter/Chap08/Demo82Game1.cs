@@ -58,7 +58,7 @@ namespace MyGame
                     models.Add(model);
                 }
 
-            CModel ground = new CModel(Content.Load<Model>("Content/ground"),
+            CModel ground = new CModel(Content.Load<Model>("Content/Ground"),
                 Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice, false);
 
             //ground.SetModelEffect(effect, true);
