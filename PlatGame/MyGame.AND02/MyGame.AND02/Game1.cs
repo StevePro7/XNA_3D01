@@ -55,7 +55,7 @@ namespace MyGame
 
             // Calculate the starting world matrix
             Matrix baseWorld = Matrix.CreateScale(0.4f) *
-                Matrix.CreateRotationY(MathHelper.ToRadians(180));
+                Matrix.CreateRotationY(MathHelper.ToRadians(90));
 
             foreach (ModelMesh mesh in model.Meshes)
             {
