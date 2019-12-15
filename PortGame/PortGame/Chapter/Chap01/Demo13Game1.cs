@@ -43,10 +43,6 @@ namespace MyGame
         // Called when the game should update itself
         protected override void Update(GameTime gameTime)
         {
-            //if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Escape))
-            //{
-            //    Exit();
-            //}
             updateCamera(gameTime);
 
             base.Update(gameTime);

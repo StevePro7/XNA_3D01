@@ -1,5 +1,7 @@
-﻿using System;
-using Foundation;
+﻿using Foundation;
+using Microsoft.Xna.Framework;
+using MyGame;
+using System.Collections.Generic;
 using UIKit;
 
 namespace MyGame.IOS
@@ -7,11 +9,16 @@ namespace MyGame.IOS
 	[Register("AppDelegate")]
 	class Program : UIApplicationDelegate
 	{
-		private static Game1 game;
-
 		internal static void RunGame()
 		{
-			game = new Game1();
+			int index = 11;
+
+			GameDictionary obj = new GameDictionary();
+			IDictionary<int, Game> dictionary = obj.GetGameDictionary();
+
+			Game game = dictionary[index];
+			game.Window.Title = $"Demo{index}Game";
+			game.IsMouseVisible = true;
 			game.Run();
 		}
 
