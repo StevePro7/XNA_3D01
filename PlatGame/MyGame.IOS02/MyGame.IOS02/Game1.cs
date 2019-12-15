@@ -1,18 +1,21 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework.Input;
 
 namespace MyGame
 {
-    public class Game1 : MyBaseGame
+    public class Demo15Game1 : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Model model;
-        Matrix[] modelTransforms;
-        //Texture2D image;
+        List<CModel> models = new List<CModel>();
+        Camera camera;
 
-        public Game1()
+        MouseState lastMouseState;
+
+        public Demo15Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             //Content.RootDirectory = "Content";
@@ -26,17 +29,66 @@ namespace MyGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            model = Content.Load<Model>("Content/ship__cv1");
-            //image = Content.Load<Texture2D>("Content/ship_tex");
+            models.Add(new CModel(Content.Load<Model>("Content/ship__cv1"),
+                new Vector3(0, 400, 0), Vector3.Zero, new Vector3(0.4f), GraphicsDevice));
 
-            modelTransforms = new Matrix[model.Bones.Count];
-            model.CopyAbsoluteBoneTransformsTo(modelTransforms);
+            var b = Content.Load<Model>("Content/Ground");
+            models.Add(new CModel(Content.Load<Model>("Content/Ground"),
+                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice, false));
+
+            camera = new ChaseCamera(new Vector3(0, 400, 1500), new Vector3(0, 200, 0),
+                new Vector3(0, 0, 0), GraphicsDevice);
+
+            lastMouseState = Mouse.GetState();
         }
 
         // Called when the game should update itself
         protected override void Update(GameTime gameTime)
         {
+            updateModel(gameTime);
+            updateCamera(gameTime);
+
             base.Update(gameTime);
+        }
+
+        void updateModel(GameTime gameTime)
+        {
+            KeyboardState keyState = Keyboard.GetState();
+
+            Vector3 rotChange = new Vector3(0, 0, 0);
+
+            // Determine on which axes the ship should be rotated on, if any
+            if (keyState.IsKeyDown(Keys.W))
+                rotChange += new Vector3(1, 0, 0);
+            if (keyState.IsKeyDown(Keys.S))
+                rotChange += new Vector3(-1, 0, 0);
+            if (keyState.IsKeyDown(Keys.A))
+                rotChange += new Vector3(0, 1, 0);
+            if (keyState.IsKeyDown(Keys.D))
+                rotChange += new Vector3(0, -1, 0);
+
+            models[0].Rotation += rotChange * .025f;
+
+            // If space isn't down, the ship shouldn't move
+            if (!keyState.IsKeyDown(Keys.Space))
+                return;
+
+            // Determine what direction to move in
+            Matrix rotation = Matrix.CreateFromYawPitchRoll(
+                models[0].Rotation.Y, models[0].Rotation.X, models[0].Rotation.Z);
+
+            // Move in the direction dictated by our rotation matrix
+            models[0].Position += Vector3.Transform(Vector3.Forward, rotation)
+                * (float)gameTime.ElapsedGameTime.TotalMilliseconds * 4;
+        }
+
+        void updateCamera(GameTime gameTime)
+        {
+            // Move the camera to the new model's position and orientation
+            ((ChaseCamera)camera).Move(models[0].Position, models[0].Rotation);
+
+            // Update the camera
+            camera.Update();
         }
 
         // Called when the game should draw itself
@@ -44,41 +96,9 @@ namespace MyGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            Matrix view = Matrix.CreateLookAt(
-                new Vector3(200, 300, 900),
-                new Vector3(0, 50, 0),
-                Vector3.Up);
-
-            Matrix projection = Matrix.CreatePerspectiveFieldOfView(
-                MathHelper.ToRadians(45), GraphicsDevice.Viewport.AspectRatio,
-                0.1f, 10000.0f);
-
-            // Calculate the starting world matrix
-            Matrix baseWorld = Matrix.CreateScale(0.2f) *
-                Matrix.CreateRotationY(MathHelper.ToRadians(135));
-
-            foreach (ModelMesh mesh in model.Meshes)
-            {
-                // Calculate each mesh's world matrix
-                Matrix localWorld = modelTransforms[mesh.ParentBone.Index]
-                    * baseWorld;
-
-                foreach (ModelMeshPart part in mesh.MeshParts)
-                {
-                    BasicEffect e = (BasicEffect)part.Effect;
-
-                    // Set the world, view, and projection 
-                    // matrices to the effect
-                    e.World = localWorld;
-                    e.View = view;
-                    e.Projection = projection;
-                    //e.Texture = image;
-                    e.EnableDefaultLighting();
-                }
-
-                // Draw the mesh
-                mesh.Draw();
-            }
+            foreach (CModel model in models)
+                if (camera.BoundingVolumeIsInView(model.BoundingSphere))
+                    model.Draw(camera.View, camera.Projection);
 
             base.Draw(gameTime);
         }

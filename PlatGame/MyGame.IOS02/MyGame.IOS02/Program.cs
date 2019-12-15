@@ -7,11 +7,11 @@ namespace MyGame.IOS02
 	[Register("AppDelegate")]
 	class Program : UIApplicationDelegate
 	{
-		private static Game1 game;
+		//private static Game1 game;
 
 		internal static void RunGame()
 		{
-			game = new Game1();
+			var game = new Demo15Game1();
 			game.Run();
 		}
 

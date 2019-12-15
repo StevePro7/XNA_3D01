@@ -18,7 +18,7 @@ namespace MyGame.AND02
 		protected override void OnCreate(Bundle bundle)
 		{
 			base.OnCreate(bundle);
-			var g = new Game1();
+			var g = new Demo15Game1();
 			SetContentView((View)g.Services.GetService(typeof(View)));
 			g.Run();
 		}
