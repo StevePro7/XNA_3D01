@@ -113,6 +113,31 @@
   <ItemGroup>
     <Compile Include="Chapter\MyBaseGame.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Library\Animation.cs" />
+    <Compile Include="Library\BillboardCross.cs" />
+    <Compile Include="Library\BillboardSystem.cs" />
+    <Compile Include="Library\Camera\ArcBallCamera.cs" />
+    <Compile Include="Library\Camera\Camera.cs" />
+    <Compile Include="Library\Camera\ChaseCamera.cs" />
+    <Compile Include="Library\Camera\FreeCamera.cs" />
+    <Compile Include="Library\CModel.cs" />
+    <Compile Include="Library\DepthOfField.cs" />
+    <Compile Include="Library\GaussianBlur.cs" />
+    <Compile Include="Library\Materials\Material.cs" />
+    <Compile Include="Library\Materials\MultiLightingMaterial.cs" />
+    <Compile Include="Library\Materials\PointLightMaterial.cs" />
+    <Compile Include="Library\Materials\ProjectedTextureMaterial.cs" />
+    <Compile Include="Library\Materials\SpotLightMaterial.cs" />
+    <Compile Include="Library\ParticleSystem.cs" />
+    <Compile Include="Library\ParticleVertex.cs" />
+    <Compile Include="Library\PostProcessor.cs" />
+    <Compile Include="Library\PPPointLight.cs" />
+    <Compile Include="Library\PrelightingRenderer.cs" />
+    <Compile Include="Library\RaceTrack.cs" />
+    <Compile Include="Library\SkySphere.cs" />
+    <Compile Include="Library\TargetCamera.cs" />
+    <Compile Include="Library\Terrain.cs" />
+    <Compile Include="Library\Water.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
