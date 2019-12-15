@@ -2,6 +2,9 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Views;
+using Microsoft.Xna.Framework;
+using MyGame;
+using System.Collections.Generic;
 
 namespace MyGame.AND
 {
@@ -17,10 +20,18 @@ namespace MyGame.AND
 	{
 		protected override void OnCreate(Bundle bundle)
 		{
+			int index = 11;
 			base.OnCreate(bundle);
-			var g = new Game1();
-			SetContentView((View)g.Services.GetService(typeof(View)));
-			g.Run();
+
+			GameDictionary obj = new GameDictionary();
+			IDictionary<int, Game> dictionary = obj.GetGameDictionary();
+
+			Game game = dictionary[index];
+			game.Window.Title = $"Demo{index}Game";
+			game.IsMouseVisible = true;
+
+			SetContentView((View)game.Services.GetService(typeof(View)));
+			game.Run();
 		}
 	}
 }
