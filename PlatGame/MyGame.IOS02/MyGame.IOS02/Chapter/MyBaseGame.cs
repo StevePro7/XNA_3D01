@@ -9,7 +9,9 @@ namespace MyGame
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
-                //Exit();
+#if IOS
+                Exit();
+#endif
             }
 
             base.Update(gameTime);

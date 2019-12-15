@@ -10,7 +10,7 @@ namespace MyGame
 
         Model model;
         Matrix[] modelTransforms;
-        Texture2D image;
+        //Texture2D image;
 
         public Game1()
         {
@@ -27,7 +27,7 @@ namespace MyGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             model = Content.Load<Model>("Content/ship__cv1");
-            image = Content.Load<Texture2D>("Content/ship_tex");
+            //image = Content.Load<Texture2D>("Content/ship_tex");
 
             modelTransforms = new Matrix[model.Bones.Count];
             model.CopyAbsoluteBoneTransformsTo(modelTransforms);
@@ -54,8 +54,8 @@ namespace MyGame
                 0.1f, 10000.0f);
 
             // Calculate the starting world matrix
-            Matrix baseWorld = Matrix.CreateScale(0.4f) *
-                Matrix.CreateRotationY(MathHelper.ToRadians(90));
+            Matrix baseWorld = Matrix.CreateScale(0.2f) *
+                Matrix.CreateRotationY(MathHelper.ToRadians(270));
 
             foreach (ModelMesh mesh in model.Meshes)
             {
@@ -72,7 +72,7 @@ namespace MyGame
                     e.World = localWorld;
                     e.View = view;
                     e.Projection = projection;
-                    e.Texture = image;
+                    //e.Texture = image;
                     e.EnableDefaultLighting();
                 }
 
