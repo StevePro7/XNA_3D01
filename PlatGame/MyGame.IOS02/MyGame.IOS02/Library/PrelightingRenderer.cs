@@ -60,8 +60,11 @@ namespace MyGame
             viewHeight = GraphicsDevice.Viewport.Height;
 
             // Create the three render targets
+            //depthTarg = new RenderTarget2D(GraphicsDevice, viewWidth, 
+            //viewHeight, false, SurfaceFormat.Single, DepthFormat.Depth24);
+
             depthTarg = new RenderTarget2D(GraphicsDevice, viewWidth, 
-                viewHeight, false, SurfaceFormat.Single, DepthFormat.Depth24);
+                viewHeight, false, SurfaceFormat.Color, DepthFormat.Depth24);
 
             normalTarg = new RenderTarget2D(GraphicsDevice, viewWidth, 
                 viewHeight, false, SurfaceFormat.Color, DepthFormat.Depth24);

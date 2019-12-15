@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MyGame
 {
-    public class Demo15Game1 : MyBaseGame
+    public class Demo41Game1 : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -15,9 +15,17 @@ namespace MyGame
 
         MouseState lastMouseState;
 
-        public Demo15Game1()
+        PrelightingRenderer renderer;
+
+        public Demo41Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+
+            // http://community.monogame.net/t/effect-loading-sharpdx-sharpdxexception-occurred-in-sharpdx-dll/8242/3
+            // http://community.monogame.net/t/solved-effect-load-errors-with-latest-build-directx/8741
+            GraphicsProfile gp1 = graphics.GraphicsProfile;
+            graphics.GraphicsProfile = GraphicsProfile.HiDef;
+            GraphicsProfile gp2 = graphics.GraphicsProfile;
             //Content.RootDirectory = "Content";
 
             graphics.PreferredBackBufferWidth = 1280;
@@ -29,14 +37,39 @@ namespace MyGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            models.Add(new CModel(Content.Load<Model>("Content/ship__cv1"),
-                new Vector3(0, 400, 0), Vector3.Zero, new Vector3(0.4f), GraphicsDevice));
+            models.Add(new CModel(Content.Load<Model>("Content/teapot__cv1"),
+                new Vector3(0, 60, 0), Vector3.Zero, new Vector3(60),
+                GraphicsDevice));
 
             models.Add(new CModel(Content.Load<Model>("Content/Ground"),
                 Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice, false));
 
-            camera = new ChaseCamera(new Vector3(0, 400, 1500), new Vector3(0, 200, 0),
-                new Vector3(0, 0, 0), GraphicsDevice);
+            Effect effect = Content.Load<Effect>("Content/ProjectedTexture");
+
+            models[0].SetModelEffect(effect, true);
+            //models[1].SetModelEffect(effect, true);
+
+            ProjectedTextureMaterial mat = new ProjectedTextureMaterial(
+                Content.Load<Texture2D>("Content/projected_texture"), GraphicsDevice);
+            mat.ProjectorPosition = new Vector3(0, 4500, 4500);
+            mat.ProjectorTarget = new Vector3(0, 0, 0);
+            mat.Scale = 2;
+
+            models[0].Material = mat;
+            //models[1].Material = mat;
+
+            camera = new FreeCamera(new Vector3(0, 200, 600),
+                MathHelper.ToRadians(0), // Turned around 153 degrees
+                MathHelper.ToRadians(5), // Pitched up 13 degrees
+                GraphicsDevice);
+
+            renderer = new PrelightingRenderer(GraphicsDevice, Content);
+            renderer.Models = models;
+            renderer.Camera = camera;
+            renderer.Lights = new List<PPPointLight>() {
+                new PPPointLight(new Vector3(-1000, 1000, 0), Color.Red * .85f, 2000),
+                new PPPointLight(new Vector3(1000, 1000, 0), Color.Blue * .85f, 2000),
+            };
 
             lastMouseState = Mouse.GetState();
         }
@@ -44,60 +77,56 @@ namespace MyGame
         // Called when the game should update itself
         protected override void Update(GameTime gameTime)
         {
-            updateModel(gameTime);
             updateCamera(gameTime);
 
             base.Update(gameTime);
         }
 
-        void updateModel(GameTime gameTime)
-        {
-            KeyboardState keyState = Keyboard.GetState();
-
-            Vector3 rotChange = new Vector3(0, 0, 0);
-
-            // Determine on which axes the ship should be rotated on, if any
-            if (keyState.IsKeyDown(Keys.W))
-                rotChange += new Vector3(1, 0, 0);
-            if (keyState.IsKeyDown(Keys.S))
-                rotChange += new Vector3(-1, 0, 0);
-            if (keyState.IsKeyDown(Keys.A))
-                rotChange += new Vector3(0, 1, 0);
-            if (keyState.IsKeyDown(Keys.D))
-                rotChange += new Vector3(0, -1, 0);
-
-            models[0].Rotation += rotChange * .025f;
-
-            // If space isn't down, the ship shouldn't move
-            if (!keyState.IsKeyDown(Keys.Space))
-                return;
-
-            // Determine what direction to move in
-            Matrix rotation = Matrix.CreateFromYawPitchRoll(
-                models[0].Rotation.Y, models[0].Rotation.X, models[0].Rotation.Z);
-
-            // Move in the direction dictated by our rotation matrix
-            models[0].Position += Vector3.Transform(Vector3.Forward, rotation)
-                * (float)gameTime.ElapsedGameTime.TotalMilliseconds * 4;
-        }
-
         void updateCamera(GameTime gameTime)
         {
-            // Move the camera to the new model's position and orientation
-            ((ChaseCamera)camera).Move(models[0].Position, models[0].Rotation);
+            // Get the new keyboard and mouse state
+            MouseState mouseState = Mouse.GetState();
+            KeyboardState keyState = Keyboard.GetState();
+
+            // Determine how much the camera should turn
+            float deltaX = (float)lastMouseState.X - (float)mouseState.X;
+            float deltaY = (float)lastMouseState.Y - (float)mouseState.Y;
+
+            // Rotate the camera
+            ((FreeCamera)camera).Rotate(deltaX * .005f, deltaY * .005f);
+
+            Vector3 translation = Vector3.Zero;
+
+            // Determine in which direction to move the camera
+            if (keyState.IsKeyDown(Keys.W)) translation += Vector3.Forward;
+            if (keyState.IsKeyDown(Keys.S)) translation += Vector3.Backward;
+            if (keyState.IsKeyDown(Keys.A)) translation += Vector3.Left;
+            if (keyState.IsKeyDown(Keys.D)) translation += Vector3.Right;
+
+            // Move 3 units per millisecond, independent of frame rate
+            translation *= 4 *
+                (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            // Move the camera
+            ((FreeCamera)camera).Move(translation);
 
             // Update the camera
             camera.Update();
+
+            // Update the mouse state
+            lastMouseState = mouseState;
         }
 
         // Called when the game should draw itself
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            renderer.Draw();
+
+            GraphicsDevice.Clear(Color.Black);
 
             foreach (CModel model in models)
                 if (camera.BoundingVolumeIsInView(model.BoundingSphere))
-                    model.Draw(camera.View, camera.Projection);
+                    model.Draw(camera.View, camera.Projection, ((FreeCamera)camera).Position);
 
             base.Draw(gameTime);
         }
