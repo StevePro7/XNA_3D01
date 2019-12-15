@@ -2,10 +2,11 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace MyGame
 {
-    public class Demo41Game1 : MyBaseGame
+    public class Demo85Game1 : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -15,17 +16,14 @@ namespace MyGame
 
         MouseState lastMouseState;
 
-        PrelightingRenderer renderer;
+        RenderCapture renderCapture;
+        RenderCapture glowCapture;
+        Effect glowEffect;
+        GaussianBlur blur;
 
-        public Demo41Game1()
+        public Demo85Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-
-            // http://community.monogame.net/t/effect-loading-sharpdx-sharpdxexception-occurred-in-sharpdx-dll/8242/3
-            // http://community.monogame.net/t/solved-effect-load-errors-with-latest-build-directx/8741
-            GraphicsProfile gp1 = graphics.GraphicsProfile;
-            graphics.GraphicsProfile = GraphicsProfile.HiDef;
-            GraphicsProfile gp2 = graphics.GraphicsProfile;
             //Content.RootDirectory = "Content";
 
             graphics.PreferredBackBufferWidth = 1280;
@@ -37,39 +35,43 @@ namespace MyGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            models.Add(new CModel(Content.Load<Model>("Content/teapot__cv1"),
-                new Vector3(0, 60, 0), Vector3.Zero, new Vector3(60),
-                GraphicsDevice));
-
-            models.Add(new CModel(Content.Load<Model>("Content/Ground"),
-                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice, false));
-
-            Effect effect = Content.Load<Effect>("Content/ProjectedTexture");
-
-            models[0].SetModelEffect(effect, true);
-            //models[1].SetModelEffect(effect, true);
-
-            ProjectedTextureMaterial mat = new ProjectedTextureMaterial(
-                Content.Load<Texture2D>("Content/projected_texture"), GraphicsDevice);
-            mat.ProjectorPosition = new Vector3(0, 4500, 4500);
-            mat.ProjectorTarget = new Vector3(0, 0, 0);
-            mat.Scale = 2;
-
-            models[0].Material = mat;
-            //models[1].Material = mat;
-
-            camera = new FreeCamera(new Vector3(0, 200, 600),
-                MathHelper.ToRadians(0), // Turned around 153 degrees
-                MathHelper.ToRadians(5), // Pitched up 13 degrees
+            camera = new FreeCamera(new Vector3(1000, 650, 1000),
+                MathHelper.ToRadians(45),
+                MathHelper.ToRadians(-30),
                 GraphicsDevice);
 
-            renderer = new PrelightingRenderer(GraphicsDevice, Content);
-            renderer.Models = models;
-            renderer.Camera = camera;
-            renderer.Lights = new List<PPPointLight>() {
-                new PPPointLight(new Vector3(-1000, 1000, 0), Color.Red * .85f, 2000),
-                new PPPointLight(new Vector3(1000, 1000, 0), Color.Blue * .85f, 2000),
-            };
+            Effect effect = Content.Load<Effect>("Content/LightingEffect");
+            LightingMaterial mat = new LightingMaterial();
+
+            for (int z = -1; z <= 1; z++)
+                for (int x = -1; x <= 1; x++)
+                {
+                    CModel model = new CModel(Content.Load<Model>("Content/glow_teapot__cv1"),
+                        new Vector3(x * 500, 0, z * 500), Vector3.Zero,
+                        Vector3.One * 5, GraphicsDevice);
+
+                    model.SetModelEffect(effect, true);
+                    model.SetModelMaterial(mat);
+
+                    models.Add(model);
+                }
+
+            CModel ground = new CModel(Content.Load<Model>("Content/glow_plane__cv1"),
+                Vector3.Zero, Vector3.Zero, Vector3.One * 6, GraphicsDevice);
+
+            ground.SetModelEffect(effect, true);
+            ground.SetModelMaterial(mat);
+
+            models.Add(ground);
+
+            renderCapture = new RenderCapture(GraphicsDevice);
+            glowCapture = new RenderCapture(GraphicsDevice);
+
+            glowEffect = Content.Load<Effect>("Content/GlowEffect");
+            glowEffect.Parameters["GlowTexture"].SetValue(
+                Content.Load<Texture2D>("Content/glow_map"));
+
+            blur = new GaussianBlur(GraphicsDevice, Content, 4);
 
             lastMouseState = Mouse.GetState();
         }
@@ -103,8 +105,8 @@ namespace MyGame
             if (keyState.IsKeyDown(Keys.A)) translation += Vector3.Left;
             if (keyState.IsKeyDown(Keys.D)) translation += Vector3.Right;
 
-            // Move 3 units per millisecond, independent of frame rate
-            translation *= 4 *
+            // Move 4 units per millisecond, independent of frame rate
+            translation *= 0.5f *
                 (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             // Move the camera
@@ -120,13 +122,54 @@ namespace MyGame
         // Called when the game should draw itself
         protected override void Draw(GameTime gameTime)
         {
-            renderer.Draw();
+            // Begin capturing the glow render
+            glowCapture.Begin();
 
             GraphicsDevice.Clear(Color.Black);
 
+            // Draw all models with the glow effect/texture applied, reverting
+            // the effect when finished
+            foreach (CModel model in models)
+                if (camera.BoundingVolumeIsInView(model.BoundingSphere))
+                {
+                    model.CacheEffects();
+                    model.SetModelEffect(glowEffect, false);
+                    model.Draw(camera.View, camera.Projection, ((FreeCamera)camera).Position);
+                    model.RestoreEffects();
+                }
+
+            // Finish capturing the glow
+            glowCapture.End();
+
+            // Draw the scene regularly into the other RenderCapture
+            renderCapture.Begin();
+
+            GraphicsDevice.Clear(Color.Black);
+
+            // Draw all models
             foreach (CModel model in models)
                 if (camera.BoundingVolumeIsInView(model.BoundingSphere))
                     model.Draw(camera.View, camera.Projection, ((FreeCamera)camera).Position);
+
+            // Finish capturing
+            renderCapture.End();
+
+            // Blur the glow render back into the glow RenderCapture
+            blur.Input = glowCapture.GetTexture();
+            blur.ResultCapture = glowCapture;
+            blur.Draw();
+
+            GraphicsDevice.Clear(Color.Black);
+
+            // Draw the blurred glow render over the normal render additively
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive);
+            spriteBatch.Draw(renderCapture.GetTexture(), Vector2.Zero, Color.White);
+            spriteBatch.Draw(glowCapture.GetTexture(), Vector2.Zero, Color.White);
+            spriteBatch.End();
+
+            // Clean up after the SpriteBatch
+            GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+            GraphicsDevice.BlendState = BlendState.Opaque;
 
             base.Draw(gameTime);
         }
