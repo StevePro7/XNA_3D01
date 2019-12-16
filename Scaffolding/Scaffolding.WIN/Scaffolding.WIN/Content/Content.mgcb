@@ -22,6 +22,15 @@
 #begin Textures/Splash.xnb
 /copy:Textures/Splash.xnb
 
-#begin Textures/StevePro.xnb
-/copy:Textures/StevePro.xnb
+#begin Textures/StevePro.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/StevePro.png
 

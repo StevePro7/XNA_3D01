@@ -28,9 +28,10 @@ namespace WindowsGame.Common.Managers
 
 		public void LoadContentSplash()
 		{
-			// TODO revert this - only used for testing
-			String splashName = MyGame.Manager.ConfigManager.GlobalConfigData.BlankSplash ? "Splash" : "StevePro";
-			Assets.SplashTexture = LoadTexture(splashName);
+            // TODO revert this - only used for testing
+            //String splashName = MyGame.Manager.ConfigManager.GlobalConfigData.BlankSplash ? "Splash" : "StevePro";
+            String splashName = "StevePro";
+            Assets.SplashTexture = LoadTexture(splashName);
 			//Assets.SplashTexture = LoadTexture(SPLASH_NAME);
 		}
 
