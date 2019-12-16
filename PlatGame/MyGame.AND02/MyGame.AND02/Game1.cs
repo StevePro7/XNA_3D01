@@ -2,10 +2,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace MyGame
 {
-    public class Demo15Game1 : MyBaseGame
+    public class Demo81Game1 : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -15,7 +16,7 @@ namespace MyGame
 
         MouseState lastMouseState;
 
-        public Demo15Game1()
+        public Demo81Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             //Content.RootDirectory = "Content";
@@ -29,14 +30,42 @@ namespace MyGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            models.Add(new CModel(Content.Load<Model>("Content/ship__cv1"),
-                new Vector3(0, 400, 0), Vector3.Zero, new Vector3(0.4f), GraphicsDevice));
+            camera = new FreeCamera(new Vector3(100, 65, 100),
+                MathHelper.ToRadians(45),
+                MathHelper.ToRadians(-30),
+                GraphicsDevice);
 
-            models.Add(new CModel(Content.Load<Model>("Content/Ground"),
-                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice, false));
+            Effect lit = Content.Load<Effect>("Content/LightingEffect");
+            Effect normal = Content.Load<Effect>("Content/NormalMapEffect");
 
-            camera = new ChaseCamera(new Vector3(0, 400, 1500), new Vector3(0, 200, 0),
-                new Vector3(0, 0, 0), GraphicsDevice);
+            LightingMaterial marble = new LightingMaterial();
+            marble.SpecularColor = Color.White.ToVector3();
+
+            LightingMaterial steel = new LightingMaterial();
+            steel.SpecularColor = Color.Gray.ToVector3();
+
+            NormalMapMaterial brick = new NormalMapMaterial(
+                Content.Load<Texture2D>("Content/brick_normal_map"));
+
+            NormalMapMaterial wood = new NormalMapMaterial(
+                Content.Load<Texture2D>("Content/wood_normal"));
+
+            CModel model = new CModel(Content.Load<Model>("Content/multimesh__cv1"),
+                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice);
+
+            model.SetMeshEffect("Box01", normal, true);
+            model.SetMeshMaterial("Box01", wood);
+
+            model.SetMeshEffect("Pyramid01", normal, true);
+            model.SetMeshMaterial("Pyramid01", brick);
+
+            model.SetMeshEffect("Sphere01", lit, true);
+            model.SetMeshMaterial("Sphere01", marble);
+
+            model.SetMeshEffect("Plane01", lit, true);
+            model.SetMeshMaterial("Plane01", steel);
+
+            models.Add(model);
 
             lastMouseState = Mouse.GetState();
         }
@@ -44,60 +73,54 @@ namespace MyGame
         // Called when the game should update itself
         protected override void Update(GameTime gameTime)
         {
-            updateModel(gameTime);
             updateCamera(gameTime);
 
             base.Update(gameTime);
         }
 
-        void updateModel(GameTime gameTime)
-        {
-            KeyboardState keyState = Keyboard.GetState();
-
-            Vector3 rotChange = new Vector3(0, 0, 0);
-
-            // Determine on which axes the ship should be rotated on, if any
-            if (keyState.IsKeyDown(Keys.W))
-                rotChange += new Vector3(1, 0, 0);
-            if (keyState.IsKeyDown(Keys.S))
-                rotChange += new Vector3(-1, 0, 0);
-            if (keyState.IsKeyDown(Keys.A))
-                rotChange += new Vector3(0, 1, 0);
-            if (keyState.IsKeyDown(Keys.D))
-                rotChange += new Vector3(0, -1, 0);
-
-            models[0].Rotation += rotChange * .025f;
-
-            // If space isn't down, the ship shouldn't move
-            if (!keyState.IsKeyDown(Keys.Space))
-                return;
-
-            // Determine what direction to move in
-            Matrix rotation = Matrix.CreateFromYawPitchRoll(
-                models[0].Rotation.Y, models[0].Rotation.X, models[0].Rotation.Z);
-
-            // Move in the direction dictated by our rotation matrix
-            models[0].Position += Vector3.Transform(Vector3.Forward, rotation)
-                * (float)gameTime.ElapsedGameTime.TotalMilliseconds * 4;
-        }
-
         void updateCamera(GameTime gameTime)
         {
-            // Move the camera to the new model's position and orientation
-            ((ChaseCamera)camera).Move(models[0].Position, models[0].Rotation);
+            // Get the new keyboard and mouse state
+            MouseState mouseState = Mouse.GetState();
+            KeyboardState keyState = Keyboard.GetState();
+
+            // Determine how much the camera should turn
+            float deltaX = (float)lastMouseState.X - (float)mouseState.X;
+            float deltaY = (float)lastMouseState.Y - (float)mouseState.Y;
+
+            // Rotate the camera
+            ((FreeCamera)camera).Rotate(deltaX * .005f, deltaY * .005f);
+
+            Vector3 translation = Vector3.Zero;
+
+            // Determine in which direction to move the camera
+            if (keyState.IsKeyDown(Keys.W)) translation += Vector3.Forward;
+            if (keyState.IsKeyDown(Keys.S)) translation += Vector3.Backward;
+            if (keyState.IsKeyDown(Keys.A)) translation += Vector3.Left;
+            if (keyState.IsKeyDown(Keys.D)) translation += Vector3.Right;
+
+            // Move 4 units per millisecond, independent of frame rate
+            translation *= 0.5f *
+                (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            // Move the camera
+            ((FreeCamera)camera).Move(translation);
 
             // Update the camera
             camera.Update();
+
+            // Update the mouse state
+            lastMouseState = mouseState;
         }
 
         // Called when the game should draw itself
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             foreach (CModel model in models)
                 if (camera.BoundingVolumeIsInView(model.BoundingSphere))
-                    model.Draw(camera.View, camera.Projection);
+                    model.Draw(camera.View, camera.Projection, ((FreeCamera)camera).Position);
 
             base.Draw(gameTime);
         }

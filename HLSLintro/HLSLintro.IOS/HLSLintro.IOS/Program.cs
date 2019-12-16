@@ -1,6 +1,7 @@
 ﻿using System;
 using Foundation;
 using UIKit;
+using XNAseries3;
 
 namespace HLSLintro.IOS
 {

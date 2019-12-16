@@ -6,7 +6,7 @@ using System;
 
 namespace MyGame
 {
-    public class Demo85Game1 : MyBaseGame
+    public class Demo62Game1 : MyBaseGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -16,12 +16,10 @@ namespace MyGame
 
         MouseState lastMouseState;
 
-        RenderCapture renderCapture;
-        RenderCapture glowCapture;
-        Effect glowEffect;
-        GaussianBlur blur;
+        BillboardCross trees;
+        BillboardSystem clouds;
 
-        public Demo85Game1()
+        public Demo62Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             //Content.RootDirectory = "Content";
@@ -35,43 +33,54 @@ namespace MyGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            camera = new FreeCamera(new Vector3(1000, 650, 1000),
-                MathHelper.ToRadians(45),
-                MathHelper.ToRadians(-30),
-                GraphicsDevice);
+            models.Add(new CModel(Content.Load<Model>("Content/grass_ground"),
+                Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice, false));
 
             Effect effect = Content.Load<Effect>("Content/LightingEffect");
+
             LightingMaterial mat = new LightingMaterial();
+            mat.SpecularColor = Color.Black.ToVector3();
 
-            for (int z = -1; z <= 1; z++)
-                for (int x = -1; x <= 1; x++)
-                {
-                    CModel model = new CModel(Content.Load<Model>("Content/glow_teapot__cv1"),
-                        new Vector3(x * 500, 0, z * 500), Vector3.Zero,
-                        Vector3.One * 5, GraphicsDevice);
+            //models[0].SetModelEffect(effect, true);
+            //models[0].Material = mat;
 
-                    model.SetModelEffect(effect, true);
-                    model.SetModelMaterial(mat);
+            camera = new FreeCamera(new Vector3(0, 700, 3000),
+                MathHelper.ToRadians(0),
+                MathHelper.ToRadians(5),
+                GraphicsDevice);
 
-                    models.Add(model);
-                }
+            // Generate random tree positions
+            Random r = new Random();
+            Vector3[] positions = new Vector3[200];
 
-            CModel ground = new CModel(Content.Load<Model>("Content/glow_plane__cv1"),
-                Vector3.Zero, Vector3.Zero, Vector3.One * 6, GraphicsDevice);
+            for (int i = 0; i < positions.Length; i++)
+                positions[i] = new Vector3(
+                    (float)r.NextDouble() * 20000 - 10000,
+                    400,
+                    (float)r.NextDouble() * 20000 - 10000
+                );
 
-            ground.SetModelEffect(effect, true);
-            ground.SetModelMaterial(mat);
+            trees = new BillboardCross(GraphicsDevice, Content,
+                Content.Load<Texture2D>("Content/tree_billboard"), new Vector2(800),
+                positions);
 
-            models.Add(ground);
+            //trees.Mode = BillboardSystem.BillboardMode.Cylindrical;
 
-            renderCapture = new RenderCapture(GraphicsDevice);
-            glowCapture = new RenderCapture(GraphicsDevice);
+            Vector3[] cloudPositions = new Vector3[350];
 
-            glowEffect = Content.Load<Effect>("Content/GlowEffect");
-            glowEffect.Parameters["GlowTexture"].SetValue(
-                Content.Load<Texture2D>("Content/glow_map"));
+            for (int i = 0; i < cloudPositions.Length; i++)
+            {
+                cloudPositions[i] = new Vector3(
+                    r.Next(-6000, 6000),
+                    r.Next(2000, 3000),
+                    r.Next(-6000, 6000));
+            }
 
-            blur = new GaussianBlur(GraphicsDevice, Content, 4);
+            clouds = new BillboardSystem(GraphicsDevice, Content,
+                Content.Load<Texture2D>("Content/cloud2"), new Vector2(1000),
+                cloudPositions);
+
+            clouds.EnsureOcclusion = false;
 
             lastMouseState = Mouse.GetState();
         }
@@ -106,7 +115,7 @@ namespace MyGame
             if (keyState.IsKeyDown(Keys.D)) translation += Vector3.Right;
 
             // Move 4 units per millisecond, independent of frame rate
-            translation *= 0.5f *
+            translation *= 4 *
                 (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             // Move the camera
@@ -122,54 +131,14 @@ namespace MyGame
         // Called when the game should draw itself
         protected override void Draw(GameTime gameTime)
         {
-            // Begin capturing the glow render
-            glowCapture.Begin();
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            GraphicsDevice.Clear(Color.Black);
-
-            // Draw all models with the glow effect/texture applied, reverting
-            // the effect when finished
-            foreach (CModel model in models)
-                if (camera.BoundingVolumeIsInView(model.BoundingSphere))
-                {
-                    model.CacheEffects();
-                    model.SetModelEffect(glowEffect, false);
-                    model.Draw(camera.View, camera.Projection, ((FreeCamera)camera).Position);
-                    model.RestoreEffects();
-                }
-
-            // Finish capturing the glow
-            glowCapture.End();
-
-            // Draw the scene regularly into the other RenderCapture
-            renderCapture.Begin();
-
-            GraphicsDevice.Clear(Color.Black);
-
-            // Draw all models
             foreach (CModel model in models)
                 if (camera.BoundingVolumeIsInView(model.BoundingSphere))
                     model.Draw(camera.View, camera.Projection, ((FreeCamera)camera).Position);
 
-            // Finish capturing
-            renderCapture.End();
-
-            // Blur the glow render back into the glow RenderCapture
-            blur.Input = glowCapture.GetTexture();
-            blur.ResultCapture = glowCapture;
-            blur.Draw();
-
-            GraphicsDevice.Clear(Color.Black);
-
-            // Draw the blurred glow render over the normal render additively
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive);
-            spriteBatch.Draw(renderCapture.GetTexture(), Vector2.Zero, Color.White);
-            spriteBatch.Draw(glowCapture.GetTexture(), Vector2.Zero, Color.White);
-            spriteBatch.End();
-
-            // Clean up after the SpriteBatch
-            GraphicsDevice.DepthStencilState = DepthStencilState.Default;
-            GraphicsDevice.BlendState = BlendState.Opaque;
+            trees.Draw(camera.View, camera.Projection);
+            clouds.Draw(camera.View, camera.Projection, ((FreeCamera)camera).Up, ((FreeCamera)camera).Right);
 
             base.Draw(gameTime);
         }

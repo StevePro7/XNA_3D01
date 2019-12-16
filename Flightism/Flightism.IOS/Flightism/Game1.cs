@@ -285,7 +285,7 @@ namespace Series3D2
 		protected override void Update(GameTime gameTime)
 		{
 			if(GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-				this.Exit();
+				//this.Exit();
 
 			ProcessKeyboard(gameTime);
 			float moveSpeed = gameTime.ElapsedGameTime.Milliseconds / 500.0f * gameSpeed;

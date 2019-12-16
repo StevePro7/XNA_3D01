@@ -11,7 +11,7 @@ namespace MyGame.IOS02
 
 		internal static void RunGame()
 		{
-			var game = new Demo85Game1();
+			var game = new Demo62Game1();
 			game.Run();
 		}
 
