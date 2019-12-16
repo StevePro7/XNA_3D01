@@ -1,4 +1,5 @@
 ﻿using System;
+using WindowsGame.Common;
 
 namespace Scaffolding.WIN
 {
@@ -14,8 +15,11 @@ namespace Scaffolding.WIN
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1())
+            using(var game = new AnGame())
+            {
                 game.Run();
+            }
+                
         }
     }
 #endif

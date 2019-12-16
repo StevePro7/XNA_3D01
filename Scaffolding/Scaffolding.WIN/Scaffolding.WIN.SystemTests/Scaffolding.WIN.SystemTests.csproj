@@ -8,7 +8,7 @@
     <ProjectGuid>{CB17FF10-E015-4C94-A3FD-E4F8212A785C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Scaffolding.WIN.SystemTests</RootNamespace>
+    <RootNamespace>WindowsGame.SystemTests</RootNamespace>
     <AssemblyName>Scaffolding.WIN.SystemTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

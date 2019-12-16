@@ -9,7 +9,7 @@
     <ProjectGuid>{99F45165-F8EC-4593-B15C-D77A79528F89}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Scaffolding.WIN</RootNamespace>
+    <RootNamespace>WindowsGame</RootNamespace>
     <AssemblyName>Scaffolding.WIN</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>

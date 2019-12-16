@@ -8,7 +8,7 @@
     <ProjectGuid>{C3EF036C-8183-4146-9E78-B0E714951725}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Scaffolding.WIN.UnitTests</RootNamespace>
+    <RootNamespace>WindowsGame.UnitTests</RootNamespace>
     <AssemblyName>Scaffolding.WIN.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
