@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.902
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flightism", "Flightism\Flightism.csproj", "{7C368EE0-DF73-4058-9915-2055B8F3C880}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C368EE0-DF73-4058-9915-2055B8F3C880}.Debug|x86.ActiveCfg = Debug|x86
+		{7C368EE0-DF73-4058-9915-2055B8F3C880}.Debug|x86.Build.0 = Debug|x86
+		{7C368EE0-DF73-4058-9915-2055B8F3C880}.Release|x86.ActiveCfg = Release|x86
+		{7C368EE0-DF73-4058-9915-2055B8F3C880}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E6BF2E08-5741-48E3-9798-EE6B1E4A581F}
+	EndGlobalSection
+EndGlobal
