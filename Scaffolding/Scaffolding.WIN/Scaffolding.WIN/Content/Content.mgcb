@@ -13,3 +13,15 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Data/Config/GlobalConfig.xml
+/copy:Data/Config/GlobalConfig.xml
+
+#begin Fonts/Emulogic.xnb
+/copy:Fonts/Emulogic.xnb
+
+#begin Textures/Splash.xnb
+/copy:Textures/Splash.xnb
+
+#begin Textures/StevePro.xnb
+/copy:Textures/StevePro.xnb
+
