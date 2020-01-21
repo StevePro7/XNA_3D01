@@ -1,31 +1,22 @@
 ﻿using System;
-using Foundation;
-using UIKit;
 
 namespace SortGame
 {
-	[Register("AppDelegate")]
-	class Program : UIApplicationDelegate
-	{
-		private static Game1 game;
-
-		internal static void RunGame()
-		{
-			game = new Game1();
-			game.Run();
-		}
-
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		static void Main(string[] args)
-		{
-			UIApplication.Main(args, null, "AppDelegate");
-		}
-
-		public override void FinishedLaunching(UIApplication app)
-		{
-			RunGame();
-		}
-	}
+#if WINDOWS || LINUX
+    /// <summary>
+    /// The main class.
+    /// </summary>
+    public static class Program
+    {
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            using (var game = new Game1())
+                game.Run();
+        }
+    }
+#endif
 }
