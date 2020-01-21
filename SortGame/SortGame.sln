@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortGame", "SortGame\SortGame.csproj", "{BEDF82B4-BE45-4E4E-9837-81A406C0598C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		Ad-Hoc|iPhoneSimulator = Ad-Hoc|iPhoneSimulator
+		AppStore|iPhone = AppStore|iPhone
+		AppStore|iPhoneSimulator = AppStore|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhone = Release|iPhone
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BEDF82B4-BE45-4E4E-9837-81A406C0598C}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{BEDF82B4-BE45-4E4E-9837-81A406C0598C}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{BEDF82B4-BE45-4E4E-9837-81A406C0598C}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Ad-Hoc|iPhoneSimulator
+		{BEDF82B4-BE45-4E4E-9837-81A406C0598C}.Ad-Hoc|iPhoneSimulator.Build.0 = Ad-Hoc|iPhoneSimulator
+		{BEDF82B4-BE45-4E4E-9837-81A406C0598C}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{BEDF82B4-BE45-4E4E-9837-81A406C0598C}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{BEDF82B4-BE45-4E4E-9837-81A406C0598C}.AppStore|iPhoneSimulator.ActiveCfg = AppStore|iPhoneSimulator
+		{BEDF82B4-BE45-4E4E-9837-81A406C0598C}.AppStore|iPhoneSimulator.Build.0 = AppStore|iPhoneSimulator
+		{BEDF82B4-BE45-4E4E-9837-81A406C0598C}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{BEDF82B4-BE45-4E4E-9837-81A406C0598C}.Debug|iPhone.Build.0 = Debug|iPhone
+		{BEDF82B4-BE45-4E4E-9837-81A406C0598C}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{BEDF82B4-BE45-4E4E-9837-81A406C0598C}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{BEDF82B4-BE45-4E4E-9837-81A406C0598C}.Release|iPhone.ActiveCfg = Release|iPhone
+		{BEDF82B4-BE45-4E4E-9837-81A406C0598C}.Release|iPhone.Build.0 = Release|iPhone
+		{BEDF82B4-BE45-4E4E-9837-81A406C0598C}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{BEDF82B4-BE45-4E4E-9837-81A406C0598C}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BDF3E498-39AC-44FE-B4BF-E87C88C88282}
+	EndGlobalSection
+EndGlobal
