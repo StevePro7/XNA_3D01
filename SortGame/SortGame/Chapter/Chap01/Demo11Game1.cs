@@ -8,7 +8,6 @@ namespace MyGame
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
-
 		Model model;
 		Matrix[] modelTransforms;
 		Texture2D image;
