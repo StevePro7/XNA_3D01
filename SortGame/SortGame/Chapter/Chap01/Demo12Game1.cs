@@ -34,8 +34,8 @@ namespace MyGame
 					Vector3 rotation = new Vector3(0, MathHelper.ToRadians(90) * (y * 3 + x), 0);
 					Vector3 scale = new Vector3(0.25f);
 
-					CModel model = new CModel(model, position, rotation, scale, GraphicsDevice);
-					models.Add(model);
+					//CModel model = new CModel(model, position, rotation, scale, GraphicsDevice);
+					//models.Add(model);
 				}
 			}
 			

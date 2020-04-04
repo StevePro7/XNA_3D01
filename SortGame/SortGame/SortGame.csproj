@@ -46,6 +46,7 @@
     <Compile Include="Chapter\MyBaseGame.cs" />
     <Compile Include="Library\CModel.cs" />
     <Compile Include="Library\IRenderable.cs" />
+    <Compile Include="Library\Materials\Material.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
