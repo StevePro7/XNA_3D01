@@ -43,7 +43,12 @@
   <ItemGroup>
     <Compile Include="Chapter\Chap01\Demo11Game1.cs" />
     <Compile Include="Chapter\Chap01\Demo12Game1.cs" />
+    <Compile Include="Chapter\Chap01\Demo13Game1.cs" />
+    <Compile Include="Chapter\Chap01\Demo14Game1.cs" />
+    <Compile Include="Chapter\Chap01\Demo15Game1.cs" />
     <Compile Include="Chapter\MyBaseGame.cs" />
+    <Compile Include="Library\Camera\Camera.cs" />
+    <Compile Include="Library\Camera\FreeCamera.cs" />
     <Compile Include="Library\CModel.cs" />
     <Compile Include="Library\IRenderable.cs" />
     <Compile Include="Library\Materials\Material.cs" />
