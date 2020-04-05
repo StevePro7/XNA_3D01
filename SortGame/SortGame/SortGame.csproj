@@ -47,6 +47,10 @@
     <Compile Include="Library\CModel.cs" />
     <Compile Include="Library\IRenderable.cs" />
     <Compile Include="Library\Materials\Material.cs" />
+    <Compile Include="Library\Materials\MultiLightingMaterial.cs" />
+    <Compile Include="Library\Materials\PointLightMaterial.cs" />
+    <Compile Include="Library\Materials\ProjectedTextureMaterial.cs" />
+    <Compile Include="Library\Materials\SpotLightMaterial.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
