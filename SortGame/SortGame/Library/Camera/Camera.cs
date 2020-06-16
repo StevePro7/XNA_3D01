@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MyGame.Library.Camera
+namespace v
 {
 	public abstract class Camera
 	{

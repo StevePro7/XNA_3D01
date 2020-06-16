@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MyGame.Library.Camera
+namespace v
 {
 	public class ArcBallCamera : Camera
 	{

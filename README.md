@@ -1,8 +1,9 @@
 # XNA_3D01
 
 04/04/2020
-PortGame
-SortGame
+PortGame	srce
+SortGame	dest
+VS2015
 
 07/12/2019
 Trying to get the following to build + run
