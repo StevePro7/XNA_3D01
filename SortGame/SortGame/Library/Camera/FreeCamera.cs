@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace v
+namespace MyGame
 {
 	public class FreeCamera : Camera
 	{
