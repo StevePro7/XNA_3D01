@@ -57,12 +57,12 @@ namespace MyGame
 				{ 32, new Demo32Game1() },
 				{ 33, new Demo33Game1() },
 				{ 34, new Demo34Game1() },
-				/*
+				
 				// Chap04
 				{ 41, new Demo41Game1() },
 				{ 42, new Demo42Game1() },
 				{ 43, new Demo43Game1() },
-
+				/*
 				// Chap05
 				{ 51, new Demo51Game1() },
 				{ 52, new Demo52Game1() },

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MyGame
 {
-	public class Demo34Game1 : MyBaseGame
+	public class Demo52Game1 : MyBaseGame
 	{
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
@@ -15,9 +15,7 @@ namespace MyGame
 
 		MouseState lastMouseState;
 
-		PrelightingRenderer renderer;
-
-		public Demo34Game1()
+		public Demo52Game1()
 		{
 			graphics = new GraphicsDeviceManager(this);
 
@@ -36,36 +34,35 @@ namespace MyGame
 		{
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			models.Add(new CModel(Content.Load<Model>("Content/teapot__cv1"),
-				new Vector3(0, 60, 0), Vector3.Zero, new Vector3(60),
-				GraphicsDevice));
+			models.Add(new CModel(Content.Load<Model>("Content/brick_wall__cv1"),
+				new Vector3(0, 200, 0), Vector3.Zero, Vector3.One, GraphicsDevice));
 
 			models.Add(new CModel(Content.Load<Model>("Content/ground"),
 				Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice, false));
 
-			Effect effect = Content.Load<Effect>("Content/PPModel");
+			Effect lightingEffect = Content.Load<Effect>("Content/LightingEffect");
+			LightingMaterial lightingMat = new LightingMaterial();
 
-			models[0].SetModelEffect(effect, true);
-			//models[1].SetModelEffect(effect, true);
+			Effect normalMapEffect = Content.Load<Effect>("Content/NormalMapEffect");
+			NormalMapMaterial normalMat = new NormalMapMaterial(
+				Content.Load<Texture2D>("Content/brick_normal_map"));
 
-			camera = new FreeCamera(new Vector3(0, 200, 600),
-				MathHelper.ToRadians(0), // Turned around 153 degrees
-				MathHelper.ToRadians(5), // Pitched up 13 degrees
+			lightingMat.LightDirection = new Vector3(.5f, .5f, 1);
+			lightingMat.LightColor = Vector3.One;
+
+			normalMat.LightDirection = new Vector3(.5f, .5f, 1);
+			normalMat.LightColor = Vector3.One;
+
+			models[0].SetModelEffect(lightingEffect, true);
+			//models[1].SetModelEffect(normalMapEffect, true);
+
+			models[0].Material = lightingMat;
+			//models[1].Material = normalMat;
+
+			camera = new FreeCamera(new Vector3(0, 400, 1400),
+				MathHelper.ToRadians(0),
+				MathHelper.ToRadians(0),
 				GraphicsDevice);
-
-			renderer = new PrelightingRenderer(GraphicsDevice, Content);
-			renderer.Models = models;
-			renderer.Camera = camera;
-			renderer.Lights = new List<PPPointLight>() {
-				new PPPointLight(new Vector3(-1000, 1000, 0), Color.Red * .85f, 2000),
-				new PPPointLight(new Vector3(1000, 1000, 0), Color.Orange * .85f, 2000),
-				new PPPointLight(new Vector3(0, 1000, 1000), Color.Yellow * .85f, 2000),
-				new PPPointLight(new Vector3(0, 1000, -1000), Color.Green * .85f, 2000),
-				new PPPointLight(new Vector3(1000, 1000, 1000), Color.Blue * .85f, 2000),
-				new PPPointLight(new Vector3(-1000, 1000, 1000), Color.Indigo * .85f, 2000),
-				new PPPointLight(new Vector3(1000, 1000, -1000), Color.Violet * .85f, 2000),
-				new PPPointLight(new Vector3(-1000, 1000, -1000), Color.White * .85f, 2000)
-			};
 
 			lastMouseState = Mouse.GetState();
 		}
@@ -116,9 +113,7 @@ namespace MyGame
 		// Called when the game should draw itself
 		protected override void Draw(GameTime gameTime)
 		{
-			renderer.Draw();
-
-			GraphicsDevice.Clear(Color.Black);
+			GraphicsDevice.Clear(Color.CornflowerBlue);
 
 			foreach (CModel model in models)
 				if (camera.BoundingVolumeIsInView(model.BoundingSphere))

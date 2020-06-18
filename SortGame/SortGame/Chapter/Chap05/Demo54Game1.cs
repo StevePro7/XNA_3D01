@@ -5,19 +5,18 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MyGame
 {
-	public class Demo34Game1 : MyBaseGame
+	public class Demo54Game1 : MyBaseGame
 	{
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
 		List<CModel> models = new List<CModel>();
 		Camera camera;
+		SkySphere sky;
 
 		MouseState lastMouseState;
 
-		PrelightingRenderer renderer;
-
-		public Demo34Game1()
+		public Demo54Game1()
 		{
 			graphics = new GraphicsDeviceManager(this);
 
@@ -32,40 +31,28 @@ namespace MyGame
 			graphics.PreferredBackBufferHeight = 800;
 		}
 
+		// Called when the game should load its content
 		protected override void LoadContent()
 		{
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			models.Add(new CModel(Content.Load<Model>("Content/teapot__cv1"),
-				new Vector3(0, 60, 0), Vector3.Zero, new Vector3(60),
-				GraphicsDevice));
+				Vector3.Zero, Vector3.Zero, Vector3.One * 50, GraphicsDevice));
 
-			models.Add(new CModel(Content.Load<Model>("Content/ground"),
-				Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice, false));
+			Effect cubeMapEffect = Content.Load<Effect>("Content/CubeMapReflect");
+			CubeMapReflectMaterial cubeMat = new CubeMapReflectMaterial(
+				Content.Load<TextureCube>("Content/clouds"));
 
-			Effect effect = Content.Load<Effect>("Content/PPModel");
+			models[0].SetModelEffect(cubeMapEffect, true);
+			models[0].Material = cubeMat;
 
-			models[0].SetModelEffect(effect, true);
-			//models[1].SetModelEffect(effect, true);
+			sky = new SkySphere(Content, GraphicsDevice,
+				Content.Load<TextureCube>("Content/clouds"));
 
-			camera = new FreeCamera(new Vector3(0, 200, 600),
-				MathHelper.ToRadians(0), // Turned around 153 degrees
-				MathHelper.ToRadians(5), // Pitched up 13 degrees
+			camera = new FreeCamera(new Vector3(0, 400, 1400),
+				MathHelper.ToRadians(0),
+				MathHelper.ToRadians(0),
 				GraphicsDevice);
-
-			renderer = new PrelightingRenderer(GraphicsDevice, Content);
-			renderer.Models = models;
-			renderer.Camera = camera;
-			renderer.Lights = new List<PPPointLight>() {
-				new PPPointLight(new Vector3(-1000, 1000, 0), Color.Red * .85f, 2000),
-				new PPPointLight(new Vector3(1000, 1000, 0), Color.Orange * .85f, 2000),
-				new PPPointLight(new Vector3(0, 1000, 1000), Color.Yellow * .85f, 2000),
-				new PPPointLight(new Vector3(0, 1000, -1000), Color.Green * .85f, 2000),
-				new PPPointLight(new Vector3(1000, 1000, 1000), Color.Blue * .85f, 2000),
-				new PPPointLight(new Vector3(-1000, 1000, 1000), Color.Indigo * .85f, 2000),
-				new PPPointLight(new Vector3(1000, 1000, -1000), Color.Violet * .85f, 2000),
-				new PPPointLight(new Vector3(-1000, 1000, -1000), Color.White * .85f, 2000)
-			};
 
 			lastMouseState = Mouse.GetState();
 		}
@@ -116,9 +103,9 @@ namespace MyGame
 		// Called when the game should draw itself
 		protected override void Draw(GameTime gameTime)
 		{
-			renderer.Draw();
+			GraphicsDevice.Clear(Color.CornflowerBlue);
 
-			GraphicsDevice.Clear(Color.Black);
+			sky.Draw(camera.View, camera.Projection, ((FreeCamera)camera).Position);
 
 			foreach (CModel model in models)
 				if (camera.BoundingVolumeIsInView(model.BoundingSphere))

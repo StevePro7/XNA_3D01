@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MyGame
 {
-	public class Demo34Game1 : MyBaseGame
+	public class Demo41Game1 : MyBaseGame
 	{
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
@@ -17,7 +17,7 @@ namespace MyGame
 
 		PrelightingRenderer renderer;
 
-		public Demo34Game1()
+		public Demo41Game1()
 		{
 			graphics = new GraphicsDeviceManager(this);
 
@@ -43,10 +43,19 @@ namespace MyGame
 			models.Add(new CModel(Content.Load<Model>("Content/ground"),
 				Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice, false));
 
-			Effect effect = Content.Load<Effect>("Content/PPModel");
+			Effect effect = Content.Load<Effect>("Content/ProjectedTexture");
 
 			models[0].SetModelEffect(effect, true);
 			//models[1].SetModelEffect(effect, true);
+
+			ProjectedTextureMaterial mat = new ProjectedTextureMaterial(
+				Content.Load<Texture2D>("Content/projected_texture"), GraphicsDevice);
+			mat.ProjectorPosition = new Vector3(0, 4500, 4500);
+			mat.ProjectorTarget = Vector3.Zero;
+			mat.Scale = 2;
+
+			models[0].Material = mat;
+			//models[1].Material = mat;
 
 			camera = new FreeCamera(new Vector3(0, 200, 600),
 				MathHelper.ToRadians(0), // Turned around 153 degrees
@@ -58,13 +67,7 @@ namespace MyGame
 			renderer.Camera = camera;
 			renderer.Lights = new List<PPPointLight>() {
 				new PPPointLight(new Vector3(-1000, 1000, 0), Color.Red * .85f, 2000),
-				new PPPointLight(new Vector3(1000, 1000, 0), Color.Orange * .85f, 2000),
-				new PPPointLight(new Vector3(0, 1000, 1000), Color.Yellow * .85f, 2000),
-				new PPPointLight(new Vector3(0, 1000, -1000), Color.Green * .85f, 2000),
-				new PPPointLight(new Vector3(1000, 1000, 1000), Color.Blue * .85f, 2000),
-				new PPPointLight(new Vector3(-1000, 1000, 1000), Color.Indigo * .85f, 2000),
-				new PPPointLight(new Vector3(1000, 1000, -1000), Color.Violet * .85f, 2000),
-				new PPPointLight(new Vector3(-1000, 1000, -1000), Color.White * .85f, 2000)
+				new PPPointLight(new Vector3(1000, 1000, 0), Color.Blue * .85f, 2000),
 			};
 
 			lastMouseState = Mouse.GetState();
@@ -100,7 +103,7 @@ namespace MyGame
 			if (keyState.IsKeyDown(Keys.D)) translation += Vector3.Right;
 
 			// Move 3 units per millisecond, independent of frame rate
-			translation *= 2 *
+			translation *= 0.5f *
 				(float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
 			// Move the camera

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MyGame
 {
-	public class Demo34Game1 : MyBaseGame
+	public class Demo42Game1 : MyBaseGame
 	{
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
@@ -17,7 +17,7 @@ namespace MyGame
 
 		PrelightingRenderer renderer;
 
-		public Demo34Game1()
+		public Demo42Game1()
 		{
 			graphics = new GraphicsDeviceManager(this);
 
@@ -37,35 +37,33 @@ namespace MyGame
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			models.Add(new CModel(Content.Load<Model>("Content/teapot__cv1"),
-				new Vector3(0, 60, 0), Vector3.Zero, new Vector3(60),
+				Vector3.Zero, Vector3.Zero, new Vector3(120),
 				GraphicsDevice));
 
 			models.Add(new CModel(Content.Load<Model>("Content/ground"),
 				Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice, false));
 
-			Effect effect = Content.Load<Effect>("Content/PPModel");
+			Effect effect = Content.Load<Effect>("Content/ShadowMapping");
 
 			models[0].SetModelEffect(effect, true);
 			//models[1].SetModelEffect(effect, true);
 
-			camera = new FreeCamera(new Vector3(0, 200, 600),
-				MathHelper.ToRadians(0), // Turned around 153 degrees
-				MathHelper.ToRadians(5), // Pitched up 13 degrees
+			camera = new FreeCamera(new Vector3(0, 2200, -200),
+				MathHelper.ToRadians(0),
+				MathHelper.ToRadians(-90),
 				GraphicsDevice);
 
 			renderer = new PrelightingRenderer(GraphicsDevice, Content);
 			renderer.Models = models;
 			renderer.Camera = camera;
 			renderer.Lights = new List<PPPointLight>() {
-				new PPPointLight(new Vector3(-1000, 1000, 0), Color.Red * .85f, 2000),
-				new PPPointLight(new Vector3(1000, 1000, 0), Color.Orange * .85f, 2000),
-				new PPPointLight(new Vector3(0, 1000, 1000), Color.Yellow * .85f, 2000),
-				new PPPointLight(new Vector3(0, 1000, -1000), Color.Green * .85f, 2000),
-				new PPPointLight(new Vector3(1000, 1000, 1000), Color.Blue * .85f, 2000),
-				new PPPointLight(new Vector3(-1000, 1000, 1000), Color.Indigo * .85f, 2000),
-				new PPPointLight(new Vector3(1000, 1000, -1000), Color.Violet * .85f, 2000),
-				new PPPointLight(new Vector3(-1000, 1000, -1000), Color.White * .85f, 2000)
+				new PPPointLight(new Vector3(0, 1000, -1000), Color.White * .85f, 20000),
+				new PPPointLight(new Vector3(0, 1000, 1000), Color.White * .85f, 20000),
 			};
+			renderer.ShadowLightPosition = new Vector3(1500, 1500, 2000);
+			renderer.ShadowLightTarget = new Vector3(0, 150, 0);
+			renderer.DoShadowMapping = true;
+			renderer.ShadowMult = 0.3f;
 
 			lastMouseState = Mouse.GetState();
 		}
@@ -116,7 +114,7 @@ namespace MyGame
 		// Called when the game should draw itself
 		protected override void Draw(GameTime gameTime)
 		{
-			renderer.Draw();
+			renderer.Draw(false);
 
 			GraphicsDevice.Clear(Color.Black);
 
