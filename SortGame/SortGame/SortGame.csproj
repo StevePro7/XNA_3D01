@@ -46,6 +46,11 @@
     <Compile Include="Chapter\Chap01\Demo13Game1.cs" />
     <Compile Include="Chapter\Chap01\Demo14Game1.cs" />
     <Compile Include="Chapter\Chap01\Demo15Game1.cs" />
+    <Compile Include="Chapter\Chap02\Demo21Game1.cs" />
+    <Compile Include="Chapter\Chap03\Demo34Game1.cs" />
+    <Compile Include="Chapter\Chap03\Demo33Game1.cs" />
+    <Compile Include="Chapter\Chap03\Demo32Game1.cs" />
+    <Compile Include="Chapter\Chap03\Demo31Game1.cs" />
     <Compile Include="Chapter\MyBaseGame.cs" />
     <Compile Include="Library\Camera\ArcBallCamera.cs" />
     <Compile Include="Library\Camera\Camera.cs" />
@@ -58,6 +63,8 @@
     <Compile Include="Library\Materials\PointLightMaterial.cs" />
     <Compile Include="Library\Materials\ProjectedTextureMaterial.cs" />
     <Compile Include="Library\Materials\SpotLightMaterial.cs" />
+    <Compile Include="Library\PPPointLight.cs" />
+    <Compile Include="Library\PrelightingRenderer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

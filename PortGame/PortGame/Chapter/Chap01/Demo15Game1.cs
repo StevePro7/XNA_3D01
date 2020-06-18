@@ -29,8 +29,8 @@ namespace MyGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            //models.Add(new CModel(Content.Load<Model>("Content/ship__cv1"),
-            //    new Vector3(0, 400, 0), Vector3.Zero, new Vector3(0.4f), GraphicsDevice));
+            models.Add(new CModel(Content.Load<Model>("Content/ship__cv1"),
+                new Vector3(0, 400, 0), Vector3.Zero, new Vector3(0.4f), GraphicsDevice));
 
             models.Add(new CModel(Content.Load<Model>("Content/ground"),
                 Vector3.Zero, Vector3.Zero, Vector3.One, GraphicsDevice, false));
