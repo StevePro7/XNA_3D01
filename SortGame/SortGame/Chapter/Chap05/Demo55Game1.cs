@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MyGame
 {
-	public class Demo54Game1 : MyBaseGame
+	public class Demo55Game1 : MyBaseGame
 	{
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
@@ -16,7 +16,9 @@ namespace MyGame
 
 		MouseState lastMouseState;
 
-		public Demo54Game1()
+		Water water;
+
+		public Demo55Game1()
 		{
 			graphics = new GraphicsDeviceManager(this);
 
@@ -43,11 +45,19 @@ namespace MyGame
 			CubeMapReflectMaterial cubeMat = new CubeMapReflectMaterial(
 				Content.Load<TextureCube>("Content/clouds"));
 
-			models[0].SetModelEffect(cubeMapEffect, true);
+			models[0].SetModelEffect(cubeMapEffect, false);
 			models[0].Material = cubeMat;
+
+			Plane clip = new Plane(Vector3.Up, 0);
 
 			sky = new SkySphere(Content, GraphicsDevice,
 				Content.Load<TextureCube>("Content/clouds"));
+
+			water = new Water(Content, GraphicsDevice, Vector3.Zero, new Vector2(8000, 8000));
+
+			water.Objects.Add(sky);
+			water.Objects.Add(models[0]);
+			//water.Objects.Add(models[1]);
 
 			camera = new FreeCamera(new Vector3(0, 400, 1400),
 				MathHelper.ToRadians(0),
@@ -76,7 +86,7 @@ namespace MyGame
 			float deltaY = (float)lastMouseState.Y - (float)mouseState.Y;
 
 			// Rotate the camera
-			((FreeCamera)camera).Rotate(deltaX * .005f, deltaY * .005f);
+			//((FreeCamera)camera).Rotate(deltaX * .005f, deltaY * .005f);
 
 			Vector3 translation = Vector3.Zero;
 
@@ -87,7 +97,7 @@ namespace MyGame
 			if (keyState.IsKeyDown(Keys.D)) translation += Vector3.Right;
 
 			// Move 3 units per millisecond, independent of frame rate
-			translation *= 4 *
+			translation *= 2 *
 				(float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
 			// Move the camera
@@ -103,13 +113,17 @@ namespace MyGame
 		// Called when the game should draw itself
 		protected override void Draw(GameTime gameTime)
 		{
+			water.PreDraw(camera, gameTime);
+
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
 			sky.Draw(camera.View, camera.Projection, ((FreeCamera)camera).Position);
+			water.Draw(camera.View, camera.Projection, ((FreeCamera)camera).Position);
 
 			foreach (CModel model in models)
 				if (camera.BoundingVolumeIsInView(model.BoundingSphere))
-					model.Draw(camera.View, camera.Projection, ((FreeCamera)camera).Position);
+					model.Draw(camera.View, camera.Projection,
+						((FreeCamera)camera).Position);
 
 			base.Draw(gameTime);
 		}

@@ -54,6 +54,7 @@
     <Compile Include="Chapter\Chap03\Demo33Game1.cs" />
     <Compile Include="Chapter\Chap03\Demo32Game1.cs" />
     <Compile Include="Chapter\Chap03\Demo31Game1.cs" />
+    <Compile Include="Chapter\Chap05\Demo55Game1.cs" />
     <Compile Include="Chapter\Chap05\Demo54Game1.cs" />
     <Compile Include="Chapter\Chap05\Demo53Game1.cs" />
     <Compile Include="Chapter\Chap05\Demo52Game1.cs" />
@@ -73,6 +74,8 @@
     <Compile Include="Library\PPPointLight.cs" />
     <Compile Include="Library\PrelightingRenderer.cs" />
     <Compile Include="Library\SkySphere.cs" />
+    <Compile Include="Library\TargetCamera.cs" />
+    <Compile Include="Library\Water.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

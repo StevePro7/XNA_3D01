@@ -1,0 +1,23 @@
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace MyGame
+{
+	public class TargetCamera : Camera
+	{
+		public Vector3 Position { get; set; }
+		public Vector3 Target { get; set; }
+
+		public TargetCamera(Vector3 Position, Vector3 Target,
+			GraphicsDevice graphicsDevice) : base(graphicsDevice)
+		{
+			this.Position = Position;
+			this.Target = Target;
+		}
+
+		public override void Update()
+		{
+			this.View = Matrix.CreateLookAt(Position, Target, Vector3.Up);
+		}
+	}
+}
