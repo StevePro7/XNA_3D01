@@ -59,7 +59,9 @@
     <Compile Include="Chapter\Chap05\Demo53Game1.cs" />
     <Compile Include="Chapter\Chap05\Demo52Game1.cs" />
     <Compile Include="Chapter\Chap05\Demo51Game1.cs" />
+    <Compile Include="Chapter\Chap06\Demo61Game1.cs" />
     <Compile Include="Chapter\MyBaseGame.cs" />
+    <Compile Include="Library\BillboardSystem.cs" />
     <Compile Include="Library\Camera\ArcBallCamera.cs" />
     <Compile Include="Library\Camera\Camera.cs" />
     <Compile Include="Library\Camera\ChaseCamera.cs" />
