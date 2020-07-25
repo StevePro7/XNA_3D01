@@ -69,9 +69,10 @@ namespace MyGame
 				{ 53, new Demo53Game1() },
 				{ 54, new Demo54Game1() },
 				{ 55, new Demo55Game1() },
-				/*
+				
 				// Chap06
 				{ 61, new Demo61Game1() },
+                /*
 				{ 62, new Demo62Game1() },
 				{ 63, new Demo63Game1() },
 
