@@ -63,6 +63,7 @@
     <Compile Include="Chapter\Chap06\Demo62Game1.cs" />
     <Compile Include="Chapter\Chap06\Demo63Game1.cs" />
     <Compile Include="Chapter\MyBaseGame.cs" />
+    <Compile Include="Library\BillboardCross.cs" />
     <Compile Include="Library\BillboardSystem.cs" />
     <Compile Include="Library\Camera\ArcBallCamera.cs" />
     <Compile Include="Library\Camera\Camera.cs" />
