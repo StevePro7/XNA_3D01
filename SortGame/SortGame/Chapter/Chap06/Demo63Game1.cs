@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
 using System;
 
-namespace MyGame.Chapter.Chap06
+namespace MyGame
 {
     public class Demo63Game1 : MyBaseGame
     {
