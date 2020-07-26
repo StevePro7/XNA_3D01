@@ -1,185 +1,108 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Input;
+//http://www.monogame.net/documentation/?page=Custom_Effects
+#if OPENGL
+	#define VS_SHADERMODEL vs_3_0
+	#define PS_SHADERMODEL ps_3_0
+#else
+	#define VS_SHADERMODEL vs_4_0_level_9_1
+	#define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
 
-namespace MyGame
+
+float4x4 World;
+float4x4 View;
+float4x4 Projection;
+
+float3 CameraPosition;
+
+float4x4 ReflectedView;
+
+texture ReflectionMap;
+
+float3 BaseColor = float3(0.2, 0.2, 0.8);
+float BaseColorAmount = 0.3f;
+
+float3 LightDirection = float3(1, 1, 1);
+
+sampler2D reflectionSampler = sampler_state {
+	texture = <ReflectionMap>; 
+	MinFilter = Anisotropic; 
+	MagFilter = Anisotropic;
+	AddressU = Mirror;
+	AddressV = Mirror;
+};
+
+texture WaterNormalMap;
+
+sampler2D waterNormalSampler = sampler_state {
+	texture = <WaterNormalMap>; 
+	MinFilter = Anisotropic; 
+	MagFilter = Anisotropic;
+};
+
+float WaveLength = 0.6;
+float WaveHeight = 0.2;
+float Time = 0;
+float WaveSpeed = 0.04f;
+
+#include "PPShared.vsi"
+
+struct VertexShaderInput
 {
-	public class BillboardCross
-	{
-		// Vertex buffer and index buffer, particle
-		// and index arrays
-		VertexBuffer verts;
-		IndexBuffer ints;
-		VertexPositionTexture[] particles;
-		int[] indices;
+    float4 Position : POSITION0;
+    float2 UV : TEXCOORD0;
+};
 
-		// Billboard settings
-		int nBillboards;
-		Vector2 billboardSize;
-		Texture2D texture;
+struct VertexShaderOutput
+{
+    float4 Position : POSITION0;
+    float4 ReflectionPosition : TEXCOORD1;
+    float2 NormalMapPosition : TEXCOORD2;
+    float4 WorldPosition : TEXCOORD3;
+};
 
-		// GraphicsDevice and Effect
-		GraphicsDevice graphicsDevice;
-		Effect effect;
+VertexShaderOutput VertexShaderFunction(VertexShaderInput input)
+{
+    VertexShaderOutput output;
 
-		public bool EnsureOcclusion = true;
+    float4x4 wvp = mul(World, mul(View, Projection));
+    output.Position = mul(input.Position, wvp);
+    
+    float4x4 rwvp = mul(World, mul(ReflectedView, Projection));
+    output.ReflectionPosition = mul(input.Position, rwvp);
+    
+	output.NormalMapPosition = input.UV / WaveLength;
+	output.NormalMapPosition.y -= Time * WaveSpeed;
+	
+	output.WorldPosition = mul(input.Position, World);
 
-		public BillboardCross( GraphicsDevice graphicsDevice,
-			ContentManager content, Texture2D texture,
-			Vector2 billboardSize, Vector3[] particlePositions )
-		{
-			this.nBillboards = particlePositions.Length;
-			this.billboardSize = billboardSize;
-			this.graphicsDevice = graphicsDevice;
-			this.texture = texture;
+    return output;
+}
 
-			effect = content.Load<Effect>( "Content/BillboardCrossEffect" );
+float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
+{
+	float2 reflectionUV = postProjToScreen(input.ReflectionPosition)
+		+ halfPixel();
+		
+	float4 normal = tex2D(waterNormalSampler, input.NormalMapPosition) * 2 - 1;
+	float2 UVOffset = WaveHeight * normal.rg;
 
-			generateParticles( particlePositions );
-		}
+	float3 reflection = tex2D(reflectionSampler, reflectionUV + UVOffset);
+	 
+	float3 viewDirection = normalize(CameraPosition - input.WorldPosition);
 
-		void generateParticles( Vector3[] particlePositions )
-		{
-			// Create vertex and index arrays
-			particles = new VertexPositionTexture[ nBillboards * 8 ];
-			indices = new int[ nBillboards * 12 ];
+	float3 reflectionVector = -reflect(LightDirection, normal.rgb);
+	float specular = dot(normalize(reflectionVector), viewDirection);
+	specular = pow(specular, 256);
 
-			int x = 0;
+	return float4(lerp(reflection, BaseColor, BaseColorAmount)
+	 + specular, 1);
+}
 
-			// For each billboard...
-			for( int i = 0; i < nBillboards * 8; i += 8 )
-			{
-				Vector3 pos = particlePositions[ i / 8 ];
-
-				Vector3 offsetX = new Vector3( billboardSize.X / 2.0f, billboardSize.Y / 2.0f, 0 );
-				Vector3 offsetZ = new Vector3( 0, offsetX.Y, offsetX.X );
-
-				// Add 4 vertices per rectangle
-				particles[ i + 0 ] = new VertexPositionTexture( pos + new Vector3( -1, 1, 0 ) *
-					offsetX, new Vector2( 0, 0 ) );
-				particles[ i + 1 ] = new VertexPositionTexture( pos + new Vector3( -1, -1, 0 ) *
-					offsetX, new Vector2( 0, 1 ) );
-				particles[ i + 2 ] = new VertexPositionTexture( pos + new Vector3( 1, -1, 0 ) *
-					offsetX, new Vector2( 1, 1 ) );
-				particles[ i + 3 ] = new VertexPositionTexture( pos + new Vector3( 1, 1, 0 ) *
-					offsetX, new Vector2( 1, 0 ) );
-
-				particles[ i + 4 ] = new VertexPositionTexture( pos + new Vector3( 0, 1, -1 ) *
-					offsetZ, new Vector2( 0, 0 ) );
-				particles[ i + 5 ] = new VertexPositionTexture( pos + new Vector3( 0, -1, -1 ) *
-					offsetZ, new Vector2( 0, 1 ) );
-				particles[ i + 6 ] = new VertexPositionTexture( pos + new Vector3( 0, -1, 1 ) *
-					offsetZ, new Vector2( 1, 1 ) );
-				particles[ i + 7 ] = new VertexPositionTexture( pos + new Vector3( 0, 1, 1 ) *
-					offsetZ, new Vector2( 1, 0 ) );
-
-				// Add 6 indices per rectangle to form four triangles
-				indices[ x++ ] = i + 0;
-				indices[ x++ ] = i + 3;
-				indices[ x++ ] = i + 2;
-				indices[ x++ ] = i + 2;
-				indices[ x++ ] = i + 1;
-				indices[ x++ ] = i + 0;
-
-				indices[ x++ ] = i + 0 + 4;
-				indices[ x++ ] = i + 3 + 4;
-				indices[ x++ ] = i + 2 + 4;
-				indices[ x++ ] = i + 2 + 4;
-				indices[ x++ ] = i + 1 + 4;
-				indices[ x++ ] = i + 0 + 4;
-			}
-
-			// Create and set the vertex buffer
-			verts = new VertexBuffer( graphicsDevice, typeof( VertexPositionTexture ),
-				nBillboards * 8, BufferUsage.WriteOnly );
-			verts.SetData<VertexPositionTexture>( particles );
-
-			// Create and set the index buffer
-			ints = new IndexBuffer( graphicsDevice, IndexElementSize.ThirtyTwoBits,
-				nBillboards * 12, BufferUsage.WriteOnly );
-			ints.SetData<int>( indices );
-		}
-
-		void setEffectParameters( Matrix View, Matrix Projection )
-		{
-			effect.Parameters[ "ParticleTexture" ].SetValue( texture );
-			effect.Parameters[ "View" ].SetValue( View );
-			effect.Parameters[ "Projection" ].SetValue( Projection );
-		}
-
-		public void Draw( Matrix View, Matrix Projection )
-		{
-			// Set the vertex and index buffer to the graphics card
-			graphicsDevice.SetVertexBuffer( verts );
-			graphicsDevice.Indices = ints;
-
-			graphicsDevice.BlendState = BlendState.AlphaBlend;
-
-			graphicsDevice.RasterizerState = RasterizerState.CullNone;
-
-			setEffectParameters( View, Projection );
-
-			if( EnsureOcclusion )
-			{
-				drawOpaquePixels();
-				drawTransparentPixels();
-			}
-			else
-			{
-				graphicsDevice.DepthStencilState = DepthStencilState.DepthRead;
-				effect.Parameters[ "AlphaTest" ].SetValue( false );
-				drawBillboards();
-			}
-
-			// Reset render states
-			graphicsDevice.BlendState = BlendState.Opaque;
-			graphicsDevice.DepthStencilState = DepthStencilState.Default;
-
-			// Un-set the vertex and index buffer
-			graphicsDevice.SetVertexBuffer( null );
-			graphicsDevice.Indices = null;
-		}
-
-		void drawOpaquePixels()
-		{
-			graphicsDevice.DepthStencilState = DepthStencilState.Default;
-
-			effect.Parameters[ "AlphaTest" ].SetValue( true );
-			effect.Parameters[ "AlphaTestGreater" ].SetValue( true );
-
-			drawBillboards();
-		}
-
-		void drawTransparentPixels()
-		{
-			graphicsDevice.DepthStencilState = DepthStencilState.DepthRead;
-
-			effect.Parameters[ "AlphaTest" ].SetValue( true );
-			effect.Parameters[ "AlphaTestGreater" ].SetValue( false );
-
-			drawBillboards();
-		}
-
-		void drawBillboards()
-		{
-			effect.CurrentTechnique.Passes[ 0 ].Apply();
-
-			PrimitiveType primitiveType = PrimitiveType.TriangleList;
-			int baseVertex = 0;
-			//int minVertexIndex = 0;
-			int numVertices = nBillboards * 8;
-			int startIndex = 0;
-			int primitiveCount = nBillboards * 4;
-
-			//graphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, nBillboards * 8, 0, nBillboards * 4);
-			//graphicsDevice.DrawIndexedPrimitives(primitiveType, baseVertex, minVertexIndex, numVertices, startIndex, primitiveCount);
-			//stevepro warning
-			graphicsDevice.DrawIndexedPrimitives( primitiveType, baseVertex, startIndex, primitiveCount );
-		}
-	}
+technique Technique1
+{
+    pass Pass1
+    {
+		VertexShader = compile VS_SHADERMODEL VertexShaderFunction();
+		PixelShader = compile PS_SHADERMODEL PixelShaderFunction();
+    }
 }
