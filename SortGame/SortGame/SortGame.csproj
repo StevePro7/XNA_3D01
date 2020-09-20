@@ -79,6 +79,7 @@
     <Compile Include="Library\Camera\ChaseCamera.cs" />
     <Compile Include="Library\Camera\FreeCamera.cs" />
     <Compile Include="Library\CModel.cs" />
+    <Compile Include="Library\DepthOfField.cs" />
     <Compile Include="Library\GaussianBlur.cs" />
     <Compile Include="Library\IRenderable.cs" />
     <Compile Include="Library\Materials\Material.cs" />
