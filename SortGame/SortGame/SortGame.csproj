@@ -66,6 +66,11 @@
     <Compile Include="Chapter\Chap07\Demo72Game1.cs" />
     <Compile Include="Chapter\Chap07\Demo73Game1.cs" />
     <Compile Include="Chapter\Chap07\Demo74Game1.cs" />
+    <Compile Include="Chapter\Chap08\Demo81Game1.cs" />
+    <Compile Include="Chapter\Chap08\Demo82Game1.cs" />
+    <Compile Include="Chapter\Chap08\Demo83Game1.cs" />
+    <Compile Include="Chapter\Chap08\Demo84Game1.cs" />
+    <Compile Include="Chapter\Chap08\Demo85Game1.cs" />
     <Compile Include="Chapter\MyBaseGame.cs" />
     <Compile Include="Library\BillboardCross.cs" />
     <Compile Include="Library\BillboardSystem.cs" />
@@ -74,6 +79,7 @@
     <Compile Include="Library\Camera\ChaseCamera.cs" />
     <Compile Include="Library\Camera\FreeCamera.cs" />
     <Compile Include="Library\CModel.cs" />
+    <Compile Include="Library\GaussianBlur.cs" />
     <Compile Include="Library\IRenderable.cs" />
     <Compile Include="Library\Materials\Material.cs" />
     <Compile Include="Library\Materials\MultiLightingMaterial.cs" />
@@ -82,6 +88,7 @@
     <Compile Include="Library\Materials\SpotLightMaterial.cs" />
     <Compile Include="Library\ParticleSystem.cs" />
     <Compile Include="Library\ParticleVertex.cs" />
+    <Compile Include="Library\PostProcessor.cs" />
     <Compile Include="Library\PPPointLight.cs" />
     <Compile Include="Library\PrelightingRenderer.cs" />
     <Compile Include="Library\SkySphere.cs" />
