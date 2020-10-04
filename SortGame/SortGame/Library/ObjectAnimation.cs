@@ -38,17 +38,14 @@ namespace MyGame
 			// Update the time
 			this.elapsedTime += Elapsed;
 
-			// Determine how far along hte duration value we are (0 to 1)
+			// Determine how far along the duration value we are (0 to 1)
 			float amt = (float)elapsedTime.TotalSeconds / (float)duration.TotalSeconds;
 
 			if (loop)
-				while (amt > 1)     // Wrap the time if we are looping
+				while (amt > 1) // Wrap the time if we are looping
 					amt -= 1;
-			else
-			{
-				// Clamp to the end value if we are not
+			else // Clamp to the end value if we are not
 				amt = MathHelper.Clamp(amt, 0, 1);
-			}
 
 			// Update the current position and rotation
 			Position = Vector3.Lerp(startPosition, endPosition, amt);
@@ -70,7 +67,7 @@ namespace MyGame
 		}
 	}
 
-	public class KeyFrameObjectAnimation
+	public class KeyframedObjectAnimation
 	{
 		List<ObjectAnimationFrame> frames = new List<ObjectAnimationFrame>();
 		bool loop;
@@ -79,10 +76,10 @@ namespace MyGame
 		public Vector3 Position { get; private set; }
 		public Vector3 Rotation { get; private set; }
 
-		public KeyFrameObjectAnimation(List<ObjectAnimationFrame> Frames, bool loop)
+		public KeyframedObjectAnimation(List<ObjectAnimationFrame> Frames, bool Loop)
 		{
 			this.frames = Frames;
-			this.loop = loop;
+			this.loop = Loop;
 			Position = Frames[0].Position;
 			Rotation = Frames[0].Rotation;
 		}
@@ -95,14 +92,14 @@ namespace MyGame
 			TimeSpan totalTime = elapsedTime;
 			TimeSpan end = frames[frames.Count - 1].Time;
 
-			if (loop)       // loop around the total time if necessary
+			if (loop) // Loop around the total time if necessary
 				while (totalTime > end)
 					totalTime -= end;
-			else
+			else // Otherwise, clamp to the end values
 			{
-				// Otherwise clamp to the end values
 				Position = frames[frames.Count - 1].Position;
 				Rotation = frames[frames.Count - 1].Rotation;
+				return;
 			}
 
 			int i = 0;
@@ -123,5 +120,4 @@ namespace MyGame
 			Rotation = Vector3.Lerp(frames[i].Rotation, frames[i + 1].Rotation, amt);
 		}
 	}
-
 }
