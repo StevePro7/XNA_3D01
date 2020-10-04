@@ -87,14 +87,13 @@ namespace MyGame
 				{ 83, new Demo83Game1() },
 				{ 84, new Demo84Game1() },
 				{ 85, new Demo85Game1() },
-				/*
+
 				// Chap09
 				{ 91, new Demo91Game1() },
 				{ 92, new Demo92Game1() },
 				{ 93, new Demo93Game1() },
 				{ 94, new Demo94Game1() },
 				{ 95, new Demo95Game1() }
-				*/
 			};
 
 			return dictionary;

@@ -71,6 +71,11 @@
     <Compile Include="Chapter\Chap08\Demo83Game1.cs" />
     <Compile Include="Chapter\Chap08\Demo84Game1.cs" />
     <Compile Include="Chapter\Chap08\Demo85Game1.cs" />
+    <Compile Include="Chapter\Chap09\Demo91Game1.cs" />
+    <Compile Include="Chapter\Chap09\Demo92Game1.cs" />
+    <Compile Include="Chapter\Chap09\Demo93Game1.cs" />
+    <Compile Include="Chapter\Chap09\Demo94Game1.cs" />
+    <Compile Include="Chapter\Chap09\Demo95Game1.cs" />
     <Compile Include="Chapter\MyBaseGame.cs" />
     <Compile Include="Library\BillboardCross.cs" />
     <Compile Include="Library\BillboardSystem.cs" />
@@ -112,7 +117,9 @@
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup />
