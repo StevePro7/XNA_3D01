@@ -8,5 +8,15 @@ namespace MyGame
 {
 	public class Demo91Game1 : MyBaseGame
 	{
+		GraphicsDeviceManager graphics;
+		SpriteBatch spriteBatch;
+
+		List<CModel> models = new List<CModel>();
+		Camera camera;
+
+		MouseState lastMouseState;
+
+		ObjectAnimation anim;
+
 	}
 }

@@ -92,6 +92,7 @@
     <Compile Include="Library\Materials\PointLightMaterial.cs" />
     <Compile Include="Library\Materials\ProjectedTextureMaterial.cs" />
     <Compile Include="Library\Materials\SpotLightMaterial.cs" />
+    <Compile Include="Library\ObjectAnimation.cs" />
     <Compile Include="Library\ParticleSystem.cs" />
     <Compile Include="Library\ParticleVertex.cs" />
     <Compile Include="Library\PostProcessor.cs" />
